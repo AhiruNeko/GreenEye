@@ -8,20 +8,17 @@ from utils.Recognize import recognize
 
 
 class Prepare:
-    def __init__(self):
+    def __init__(self, user_id):
         self.name = None
         self.image_pil = None
+        self.user_id = user_id
 
     def render(self):
-        self.name = utils.NAME_HOME
-        utils.NAME_HOME = None
-        self.image_pil = utils.IMAGE_HOME
-        utils.IMAGE_HOME = None
-        vegetable = ""
+        self.name = utils.USER_SESSIONS[self.user_id].get("name_home", None)
+        self.image_pil = utils.USER_SESSIONS[self.user_id].get("image_home", None)
+
         if self.image_pil and self.name:
             vegetable = str(recognize(self.image_pil)).lower()
-
-            # ui.image("./assets/prepare/prepare.png")
             overlay_b64 = self.pil_to_base64()
             with ui.row():
                 ui.image("./assets/prepare/prepare.png").style('''
@@ -35,21 +32,69 @@ class Prepare:
 
                 ui.label("Hello👋,").style('''
                     position: absolute;
-                    top: calc(50% - 250px);  /* 控件中心往上移一点 */
+                    top: 0%;
                     left: 50%;
                     transform: translateX(-50%);
-                    font-size: 24px;
-                    color: white;
-                    z-index: 10;
+                    font-size: 12vw;
+                    color: rgba(10, 72, 40, 1);
+                    font-weight:bold;
+                    text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
                 ''')
+
+                ui.label(self.name + "!").style('''
+                    position: absolute;
+                    width: auto;
+                    white-space: nowrap;
+                    top: 10%;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    font-size: 12vw;
+                    color: rgba(10, 72, 40, 1);
+                    font-weight:bold;
+                    text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+                ''')
+
+                options = ['bean', 'bitter_gourd', 'bottle_gourd', 'brinjal', 'broccoli',
+                           'cabbage', 'capsicum', 'carrot', 'cauliflower', 'cucumber',
+                           'papaya', 'potato', 'pumpkin', 'radish', 'tomato']
+                ui.select(
+                    options,
+                    label='Your local organic food is ',
+                    value=vegetable
+                ).props('flat') \
+                    .classes('!text-white !bg-[rgba(10,72,40,0.2)] rounded-lg font-bold') \
+                    .style('''
+                    position: absolute;
+                    top: 83%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    font-size: 4vw;
+                    width: 50%;
+                    backdrop-filter: blur(4px);
+                    padding: 0% 1.2%;
+                ''')
+
+                ui.button("Generate Report") \
+                    .props('flat') \
+                    .classes('!text-white !bg-[rgba(10,72,40,0.2)] rounded-lg font-bold') \
+                    .style('''
+                        position: absolute;
+                        top: 91%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        font-size: 4vw;
+                        width: auto;
+                        height: 6%;
+                        backdrop-filter: blur(4px);
+                    ''')
 
                 with ui.element('div').style('''
                     position: absolute;
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
-                    width: 300px;
-                    height: 400px;
+                    width: 62%;
+                    height: 54%;
                     background: rgba(10, 72, 40, 0.2);
                     border-radius: 20px;
                     display: flex;

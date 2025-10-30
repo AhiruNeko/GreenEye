@@ -8,8 +8,9 @@ import utils
 
 class Home:
 
-    def __init__(self):
+    def __init__(self, user_id):
         self.data_path = "./data.json"
+        self.user_id = user_id
 
         self.chemical = 0
         self.carbon = 0
@@ -45,37 +46,37 @@ class Home:
             )
 
             self.carbon_data_label = ui.label(f"{self.carbon}kg").style(
-                "position:absolute; top:990px; left:165px; "
-                "font-size:50px; color:white; font-weight:bold;"
+                "position:absolute; top:70%; left:38%; "
+                "font-size:12vw; color:white; font-weight:bold;"
                 "text-shadow: 3px 3px 8px rgba(0,0,0,0.8);"
             )
-            self.carbon_text_label = ui.label("of carbon emission reduction, equivalent to planting " + str(self.carbon // 20) + " trees").style(
-                "position:absolute; top:1055px; left:165px; "
-                "font-size:16px; color:white; font-weight:bold;"
+            self.carbon_text_label = ui.label("of carbon emission reduction, equivalent to planting " + str(self.carbon // 20) + " trees.").style(
+                "position:absolute; top:75%; left:38%; "
+                "font-size:3.5vw; color:white; font-weight:bold;"
                 "text-shadow: 3px 3px 8px rgba(0,0,0,0.8);"
             )
 
             self.water_data_label = ui.label(f"{self.water}L").style(
-                "position:absolute; top:1130px; left:165px; "
-                "font-size:50px; color:white; font-weight:bold;"
+                "position:absolute; top:79.5%; left:38%; "
+                "font-size:12vw; color:white; font-weight:bold;"
                 "text-shadow: 3px 3px 8px rgba(0,0,0,0.8);"
             )
             self.water_text_label = ui.label(
                 "of precious clean water has been saved.").style(
-                "position:absolute; top:1195px; left:165px; "
-                "font-size:16px; color:white; font-weight:bold;"
+                "position:absolute; top:84.5%; left:38%; "
+                "font-size:3.5vw; color:white; font-weight:bold;"
                 "text-shadow: 3px 3px 8px rgba(0,0,0,0.8);"
             )
 
             self.soil_data_label = ui.label(f"{self.soil}m²").style(
-                "position:absolute; top:1270px; left:165px; "
-                "font-size:50px; color:white; font-weight:bold;"
+                "position:absolute; top:90%; left:38%; "
+                "font-size:12vw; color:white; font-weight:bold;"
                 "text-shadow: 3px 3px 8px rgba(0,0,0,0.8);"
             )
             self.soil_text_label = ui.label(
                 "of healthy soil has been protected, and been full of vitality.").style(
-                "position:absolute; top:1335px; left:165px; "
-                "font-size:16px; color:white; font-weight:bold;"
+                "position:absolute; top:95%; left:38%; "
+                "font-size:3.5vw; color:white; font-weight:bold;"
                 "text-shadow: 3px 3px 8px rgba(0,0,0,0.8);"
             )
 
@@ -86,13 +87,14 @@ class Home:
                 "font-size:7vw; color:white; font-weight:bold;"
                 "text-shadow: 2px 2px 0px rgba(0,0,0,0.5);"
             )
-            self.input_box = ui.input("Enter your name").style(
+            self.input_box = ui.input("Enter your name", on_change=self.input_box_callback).style(
                 "position:absolute; top:47%; left:12%; "
                 "font-size:3vw; "
                 "color:black; "
                 "background-color:rgba(255,255,255,0.8); "
                 "border-radius:8px; "
                 "width:50%; height:8%; "
+                "padding: 0% 1.2%"
             )
             ui.button("Start").style(
                 "position:absolute; top:47%; left:65%; font-size:4vw; "
@@ -117,11 +119,13 @@ class Home:
         self.image_pil = Image.open(BytesIO(content_bytes)).convert("RGB")
         self.image_pil = ImageOps.exif_transpose(self.image_pil)
 
+    def input_box_callback(self, e):
+        self.name = e.value
+
     def start_bt_callback(self):
-        self.name = self.input_box.value
         if self.is_valid_name() and self.image_pil:
-            utils.NAME_HOME = self.name
-            utils.IMAGE_HOME = self.image_pil
+            utils.USER_SESSIONS[self.user_id]["name_home"] = self.name
+            utils.USER_SESSIONS[self.user_id]["image_home"] = self.image_pil
             ui.navigate.to("/prepare")
         else:
             ui.notify("Please enter your name and upload the photo.", color="yellow")
