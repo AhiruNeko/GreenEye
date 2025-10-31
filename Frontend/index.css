@@ -1,0 +1,173 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background: #fff;
+}
+
+/* 数据显示部分 */
+.relative-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.relative-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.absolute-label {
+    position: absolute;
+    color: white;
+    font-weight: bold;
+    text-shadow: 3px 3px 8px rgba(0,0,0,0.8);
+}
+
+.chemical-data { top: 60.5%; left: 38%; font-size:12vw; }
+.chemical-text { top: 65.5%; left: 38%; font-size:3.5vw; }
+
+.carbon-data { top: 70%; left: 38%; font-size:12vw; }
+.carbon-text { top: 75%; left: 38%; font-size:3.5vw; }
+
+.water-data { top: 79.5%; left: 38%; font-size:12vw; }
+.water-text { top: 84.5%; left: 38%; font-size:3.5vw; }
+
+.soil-data { top: 90%; left: 38%; font-size:12vw; }
+.soil-text { top: 95%; left: 38%; font-size:3.5vw; }
+
+/* 用户交互部分 */
+.join-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.join-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.join-label {
+    position:absolute;
+    top:40%; left:12%;
+    font-size:7vw;
+    color:white;
+    font-weight:bold;
+    text-shadow:2px 2px 0 rgba(0,0,0,0.5);
+}
+
+.input-box {
+    position:absolute;
+    top:47%; left:12%;
+    font-size:3vw;
+    color:black;
+    background-color:rgba(255,255,255,0.4);
+    border-radius:2vw;
+    width:50%;
+    height:6%;
+    padding: 0% 1.2%;
+    border: none;
+    backdrop-filter: blur(8px);
+}
+
+.start-button {
+    position:absolute;
+    top:47%; left:67%;
+    font-size:4vw;
+    width:20%;
+    height:6%;
+    border: none;
+    background-color: rgba(60,155,110,0.6);
+    color: white;
+    border-radius: 2vw;
+    backdrop-filter: blur(8px);
+    font-weight: bold;
+}
+
+.start-button:hover {
+    background-color: rgba(10,72,40,0.6);
+    font-weight: bold;
+}
+
+.custom-upload-btn {
+    position:absolute;
+    top:5%; left:50%;
+    width:80%; height:12%;
+    transform: translateX(-50%);
+    font-size:4vw;
+    color:white;
+    background-color: rgba(60,155,110,0.6);
+    border-radius: 2vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(8px);
+    font-weight: bold;
+}
+
+.custom-upload-btn:hover {
+    background-color: rgba(10,72,40,0.6);
+}
+
+/* 预览容器 */
+.preview-container {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 76%;
+    height: 35%;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(8px);
+    border-radius: 5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.preview-container img {
+    display: none;
+    max-width: 90%;
+    max-height: 70%;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
+}
+
+#uploadPhoto {
+    display: none;
+}
+
+#uploadHint {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3vw;
+    color: rgba(255,255,255,0.5);
+    text-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.fade-in-js {
+    opacity: 0;
+    transition: opacity 0.6s ease-out;
+}
+
+.fade-in-js.visible {
+    opacity: 1;
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Eye</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<div class="relative-container">
+    <img src="../assets/home/home.png" alt="Home Image">
+    <div class="absolute-label chemical-data" id="chemicalData"></div>
+    <div class="absolute-label chemical-text">of chemical pesticide residues reduction.</div>
+
+    <div class="absolute-label carbon-data" id="carbonData"></div>
+    <div class="absolute-label carbon-text">of carbon emission reduction, equivalent to planting 2 trees.</div>
+
+    <div class="absolute-label water-data" id="waterData"></div>
+    <div class="absolute-label water-text">of precious clean water has been saved.</div>
+
+    <div class="absolute-label soil-data" id="soilData"></div>
+    <div class="absolute-label soil-text">of healthy soil has been protected, and been full of vitality.</div>
+</div>
+
+<div class="join-container">
+    <img src="../assets/home/join%20us%20with%20text.png" alt="Join Us">
+    <div class="join-label">Add your contribution</div>
+    <input type="text" class="input-box" placeholder="Enter your name" id="username">
+    <button class="start-button" id="startBtn">Start</button>
+    <div class="preview-container" id="previewContainer">
+        <input type="file" id="uploadPhoto" accept="image/*" style="display:none;">
+        <label for="uploadPhoto" class="custom-upload-btn">Upload Photo</label>
+        <span id="uploadHint">Please upload your photo</span>
+        <img id="previewImage" src="" alt="Preview">
+    </div>
+</div>
+
+<script src="../Backend/index.js"></script>
+</body>
+</html>
