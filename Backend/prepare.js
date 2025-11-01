@@ -58,7 +58,7 @@ async function classifyVegetable() {
         console.error(err);
     } finally {
         await progressPromise;
-        await animateProgress(100, 10); // 进度条动画到100%
+        await animateProgress(100, 10);
 
         loadingOverlay.style.display = "none";
         bgContainer.style.display = "block";

@@ -37,6 +37,10 @@ document.getElementById("startBtn").addEventListener("click", () => {
     reader.readAsDataURL(file);
 });
 
+document.getElementById("logInBtn").addEventListener("click", () => {
+    window.location.href = "login.html";
+})
+
 fetch('../assets/data/data.json')
     .then(response => response.json())
     .then(data => {
