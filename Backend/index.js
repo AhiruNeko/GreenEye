@@ -1,4 +1,3 @@
-// 获取 DOM 元素
 const uploadInput = document.getElementById("uploadPhoto");
 const previewImage = document.getElementById("previewImage");
 const uploadHint = document.getElementById("uploadHint");
@@ -21,20 +20,21 @@ uploadInput.addEventListener("change", function(e) {
 
 document.getElementById("startBtn").addEventListener("click", () => {
     const name = document.getElementById("username").value.trim();
-    const fileInput = document.getElementById("uploadPhoto");
-    const file = fileInput.files[0];
+    const file = uploadInput.files[0];
 
-    if(name && file) {
-        localStorage.setItem("userName", name);
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            localStorage.setItem("userImage", event.target.result);
-            window.location.href = "prepare.html";
-        };
-        reader.readAsDataURL(file);
-    } else {
+    if (!name || !file) {
         alert("Please enter your name and upload a photo!");
+        return;
     }
+
+    localStorage.setItem("userName", name);
+
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        localStorage.setItem("userImage", event.target.result);
+        window.location.href = "prepare.html";
+    };
+    reader.readAsDataURL(file);
 });
 
 fetch('../assets/data/data.json')
@@ -47,20 +47,14 @@ fetch('../assets/data/data.json')
     })
     .catch(error => console.error('Error loading JSON:', error));
 
-// JS: 自动给页面中所有元素加浮现效果
 document.addEventListener("DOMContentLoaded", () => {
     const allElements = Array.from(document.querySelectorAll("body *"));
-
-    // 排除图片及包含图片的容器
     const elementsToFade = allElements.filter(el => {
         if (el.tagName.toLowerCase() === "img") return false;
         if (el.querySelector("img")) return false;
         return true;
     });
-
-    // 给元素加初始 class
     elementsToFade.forEach(el => el.classList.add("fade-in-js"));
-
     const observer = new IntersectionObserver(
         entries => {
             entries.forEach(entry => {
