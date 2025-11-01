@@ -38,7 +38,7 @@ fetch("https://serverless.roboflow.com/vegetable-classification-t6t4d/1?api_key=
         console.log("Roboflow API result:", data);
         const topPrediction = data.top;
         console.log("Top prediction:", topPrediction);
-        const selectElement = document.getElementById("foodSelect");
+        const selectElement = document.getElementById("food-Select");
         if(topPrediction && selectElement) {
             selectElement.value = topPrediction.toLowerCase();
         }
