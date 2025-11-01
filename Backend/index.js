@@ -9,8 +9,8 @@ uploadInput.addEventListener("change", function(e) {
         const reader = new FileReader();
         reader.onload = function(event) {
             previewImage.src = event.target.result;
-            previewImage.style.display = "block"; // 显示图片
-            uploadHint.style.display = "none";    // 隐藏文字
+            previewImage.style.display = "block";
+            uploadHint.style.display = "none";
         };
         reader.readAsDataURL(file);
     } else {
@@ -67,11 +67,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add("visible");
                 } else {
-                    entry.target.classList.remove("visible"); // 滑出视口时去掉 class
+                    entry.target.classList.remove("visible");
                 }
             });
         },
-        { threshold: 0.2 }
+        { threshold: 0.4 }
     );
 
     elementsToFade.forEach(el => observer.observe(el));

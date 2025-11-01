@@ -61,17 +61,19 @@ body {
 }
 
 .input-box {
-    position:absolute;
-    top:47%; left:12%;
-    font-size:3vw;
-    color:black;
-    background-color:rgba(255,255,255,0.4);
-    border-radius:2vw;
-    width:50%;
-    height:6%;
-    padding: 0% 1.2%;
-    border: none;
-    backdrop-filter: blur(8px);
+    position: absolute;
+    top: 47%;
+    left: 12%;
+    width: 50%;
+    height: 6%;
+    font-size: 3vw;
+    padding: 0 1.2%;
+    border-radius: 2vw;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(1.2vw) brightness(120%);
+    -webkit-backdrop-filter: blur(1.2vw) brightness(120%);
+    border: 0.2vw ridge rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 1vw rgba(0, 0, 0, 0.3);
 }
 
 .start-button {
@@ -80,16 +82,18 @@ body {
     font-size:4vw;
     width:20%;
     height:6%;
-    border: none;
-    background-color: rgba(60,155,110,0.6);
+    background-color: rgba(60,155,110,0.4);
     color: white;
     border-radius: 2vw;
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(1.2vw) brightness(120%);
+    -webkit-backdrop-filter: blur(1.2vw) brightness(120%);
+    border: 0.2vw ridge rgba(60,155,110,0.45);
+    box-shadow: 0 0 1vw rgba(0, 0, 0, 0.3);
     font-weight: bold;
 }
 
 .start-button:hover {
-    background-color: rgba(10,72,40,0.6);
+    background-color: rgba(10,72,40,0.4);
     font-weight: bold;
 }
 
@@ -105,7 +109,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(1.2vw) brightness(120%);
+    -webkit-backdrop-filter: blur(1.2vw) brightness(120%);
+    border: 0.2vw ridge rgba(60,155,110,0.45);
+    box-shadow: 0 0 1vw rgba(0, 0, 0, 0.3);
     font-weight: bold;
 }
 
@@ -121,8 +128,11 @@ body {
     transform: translateX(-50%);
     width: 76%;
     height: 35%;
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(1.2vw) brightness(120%);
+    -webkit-backdrop-filter: blur(1.2vw) brightness(120%);
+    border: 0.2vw ridge rgba(255,255,255,0.25);
+    box-shadow: 0 0 1vw rgba(0, 0, 0, 0.3);
     border-radius: 5vw;
     display: flex;
     justify-content: center;
@@ -147,6 +157,8 @@ body {
 
 #uploadHint {
     position: absolute;
+    white-space: nowrap;
+    font-weight: bold;
     top: 55%;
     left: 50%;
     transform: translateX(-50%);
@@ -155,13 +167,27 @@ body {
     text-shadow: 0 0 5px rgba(0,0,0,0.3);
 }
 
-.fade-in-js {
+body {
     opacity: 0;
-    transition: opacity 0.6s ease-out;
+    animation: fadeIn 2s ease-out forwards;
 }
 
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* 初始模糊状态 */
+.fade-in-js {
+    filter: blur(4vw); /* 初始模糊，可调 */
+    transition: filter 1s ease;
+}
+
+/* 可见状态：清晰 */
 .fade-in-js.visible {
-    opacity: 1;
+    filter: blur(0);
 }
 
 

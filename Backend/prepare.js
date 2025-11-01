@@ -4,7 +4,7 @@ const userImage = localStorage.getItem("userImage") || "";
 const loadingOverlay = document.getElementById("loadingOverlay");
 const bgContainer = document.getElementById("bgContainer");
 
-document.getElementById("userName").textContent = userName;
+document.getElementById("userName").textContent = userName + "!";
 
 if (userImage) {
     document.getElementById("previewImage").src = userImage;
@@ -47,5 +47,17 @@ fetch("https://serverless.roboflow.com/vegetable-classification-t6t4d/1?api_key=
     .finally(() => {
         loadingOverlay.style.display = "none";
         bgContainer.style.display = "block";
+        const allElements = Array.from(bgContainer.querySelectorAll("*"));
+        allElements.forEach(el => {
+            el.style.filter = "blur(4vw)";
+            el.style.transition = "filter 1.8s ease";
+        });
+
+        allElements.forEach((el, i) => {
+            setTimeout(() => {
+                el.style.filter = "blur(0)";
+            }, i * 80);
+        });
+
     });
 
