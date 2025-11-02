@@ -19,6 +19,7 @@ body {
 }
 
 .join-label {
+    white-space: nowrap;
     position:absolute;
     top:40%; left:50%;
     transform: translateX(-50%);

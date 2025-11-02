@@ -1,8 +1,18 @@
 const uploadInput = document.getElementById("uploadPhoto");
 const previewImage = document.getElementById("previewImage");
 const uploadHint = document.getElementById("uploadHint");
-const name = localStorage.getItem("userName") || "User";
-document.getElementById("greet").textContent = "Hi👋, " + name + "!";
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+const SUPABASE_URL = 'https://lcpbgtfrwxtagaefbusl.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxjcGJndGZyd3h0YWdhZWZidXNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIwNzA0MjUsImV4cCI6MjA3NzY0NjQyNX0.73gt5IJ3aOh1WStLZK77-MNk_coAbUQpB13COz3CFcQ';
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+window.addEventListener("load", async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    const name = user.user_metadata.name;
+    localStorage.setItem("name", name);
+    document.getElementById("greet").textContent = "Hi👋, " + name + "!";
+})
 
 uploadInput.addEventListener("change", function(e) {
     const file = e.target.files[0];
@@ -23,12 +33,10 @@ uploadInput.addEventListener("change", function(e) {
 document.getElementById("startBtn").addEventListener("click", () => {
     const file = uploadInput.files[0];
 
-    if (!name || !file) {
+    if (!file) {
         alert("Please upload a photo!");
         return;
     }
-
-    localStorage.setItem("name", name);
 
     const reader = new FileReader();
     reader.onload = function(event) {
