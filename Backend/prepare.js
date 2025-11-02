@@ -1,5 +1,5 @@
-const userName = localStorage.getItem("userName") || "User";
-const userImage = localStorage.getItem("userImage") || "";
+const userName = localStorage.getItem("name") || "User";
+const userImage = localStorage.getItem("image") || "";
 const loadingOverlay = document.getElementById("loadingOverlay");
 const bgContainer = document.getElementById("bgContainer");
 

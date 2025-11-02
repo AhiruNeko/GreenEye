@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="index.css">
 
     <nav class="navbar">
-        <div class="logo">Green Eye - Supporting Local Organic Food</div>
+        <div class="logo">
+            <a href="index.html">Green Eye</a> - Supporting Local Organic Food
+        </div>
         <button class="log-in-button" id="logInBtn">Log in</button>
     </nav>
 
@@ -32,13 +34,14 @@
 <div class="join-container">
     <img src="../assets/home/join%20us%20with%20text.png" alt="Join Us">
     <div class="join-label">Add your contribution</div>
-    <input type="text" class="input-box" placeholder="Enter your name" id="username">
-    <button class="start-button" id="startBtn">Start</button>
-    <div class="preview-container" id="previewContainer">
-        <input type="file" id="uploadPhoto" accept="image/*" style="display:none;">
-        <label for="uploadPhoto" class="custom-upload-btn">Upload Photo</label>
-        <span id="uploadHint">Please upload your photo</span>
-        <img id="previewImage" src="" alt="Preview">
+    <div class="panel">
+        <label class="log-in-label">Log in here</label>
+        <button class="log-in-here-button" id="logInHereBtn">Log in</button>
+        <div class="divider">
+            <span>OR</span>
+        </div>
+        <label class="guest-label">Continue as a guest</label>
+        <button type="button" class="guest-btn" id="guestBtn">Continue as Guest</button>
     </div>
 </div>
 

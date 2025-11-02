@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visitor Join</title>
+    <link rel="stylesheet" href="guest-join.css">
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">Green Eye</a> - Supporting Local Organic Food
+        </div>
+        <button class="log-in-button" id="logInBtn">Log in</button>
+    </nav>
+</head>
+<body>
+<div class="join-container">
+    <img src="../assets/home/join%20us%20with%20text.png" alt="Join Us">
+    <div class="join-label">Add your contribution</div>
+    <input type="text" class="input-box" placeholder="Enter your name" id="username">
+    <button class="start-button" id="startBtn">Start</button>
+    <div class="preview-container" id="previewContainer">
+        <input type="file" id="uploadPhoto" accept="image/*" style="display:none;">
+        <label for="uploadPhoto" class="custom-upload-btn">Upload Photo</label>
+        <span id="uploadHint">Please upload your photo</span>
+        <img id="previewImage" src="" alt="Preview">
+    </div>
+</div>
+<script src="../Backend/guest-join.js"></script>
+</body>
+</html>

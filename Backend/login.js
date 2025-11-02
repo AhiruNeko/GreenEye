@@ -97,7 +97,7 @@ function continueAsGuest() {
     sessionStorage.clear();
 
     // Redirect to main app
-    window.location.href = 'index.html';
+    window.location.href = 'guest-join.html';
 }
 
 // Check if user is already logged in

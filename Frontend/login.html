@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GreenEye - Login</title>
     <link rel="stylesheet" href="login.css">
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">Green Eye</a> - Supporting Local Organic Food
+        </div>
+    </nav>
 </head>
 <body>
 <div class="relative-container">
@@ -19,27 +24,15 @@
         <div id="error-message" class="error-message"></div>
         <div id="success-message" class="success-message"></div>
 
-        <form class="login-form" id="loginForm">
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" required
-                       placeholder="Enter your email address">
-            </div>
-
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required
-                       placeholder="Enter your password">
-            </div>
-        </form>
-
-        <button type="submit" class="login-btn" id="loginBtn">
-            Sign In
+        <button type="submit" class="google-login-btn" id="GoogleLoginBtn">
+            <img src="../assets/login/google.svg" class="google-icon">
+            <label class="google-login-label">Log in with Google</label>
         </button>
 
-        <div class="register-link">
-            Don't have an account? <a href="register.html">Create one here.</a>
-        </div>
+        <button type="submit" class="apple-login-btn" id="AppleLoginBtn">
+            <img src="../assets/login/apple.svg" class="apple-icon">
+            <label class="apple-login-label">Log in with Apple</label>
+        </button>
 
         <div class="guest-option">
             <p class="option-label">Or continue as guest</p>
