@@ -2,7 +2,7 @@ body {
     margin: 0;
     font-family: sans-serif;
     background: #fff;
-    padding-top: 6vh;
+    padding-top: 10vmin;
 }
 
 .join-container {
@@ -134,7 +134,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 6vh;
+    height: 10vmin;
     display: flex;
     justify-content: space-between;
     align-items: center;
