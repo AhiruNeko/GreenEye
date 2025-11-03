@@ -21,6 +21,9 @@ if (from == "index.html contributionBtn") {
 } else if (from == "guest-join.html logInBtn") {
     callbackUserURL = "user-join.html";
     callbackGuestURL = "guest-join.html";
+} else {
+    callbackUserURL = "index.html";
+    callbackGuestURL = "index.html";
 }
 
 googleLogin.addEventListener('click', async () => {
