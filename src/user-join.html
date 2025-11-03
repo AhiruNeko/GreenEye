@@ -2,20 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Visitor Join</title>
-    <link rel="stylesheet" href="guest-join.css">
+    <title>User Join</title>
+    <link rel="stylesheet" href="css/user-join.css">
     <nav class="navbar">
         <div class="logo">
             <a href="index.html">Green Eye</a> - Supporting Local Organic Food
         </div>
-        <button class="log-in-button" id="logInBtn">Log in</button>
     </nav>
 </head>
 <body>
 <div class="join-container">
-    <img src="../assets/home/join%20us%20with%20text.png" alt="Join Us">
-    <div class="join-label">Add your contribution</div>
-    <input type="text" class="input-box" placeholder="Enter your name" id="username">
+    <img src="assets/home/join%20us%20with%20text.png" alt="Join Us">
+    <div class="join-label" id="greet">Hi👋, </div>
     <button class="start-button" id="startBtn">Start</button>
     <div class="preview-container" id="previewContainer">
         <input type="file" id="uploadPhoto" accept="image/*" style="display:none;">
@@ -24,6 +22,6 @@
         <img id="previewImage" src="" alt="Preview">
     </div>
 </div>
-<script src="../Backend/guest-join.js"></script>
+<script src="js/user-join.js" type="module"></script>
 </body>
 </html>

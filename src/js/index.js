@@ -10,7 +10,7 @@ document.getElementById("guestBtn").addEventListener("click", () => {
     window.location.href = "guest-join.html";
 })
 
-fetch('../assets/data/data.json')
+fetch('assets/data/data.json')
     .then(response => response.json())
     .then(data => {
         document.getElementById('chemicalData').textContent = data.chemical + 'g';
