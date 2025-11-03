@@ -79,7 +79,7 @@ body {
     font-weight: bold;
 }
 
-.apple-icon {
+.github-icon {
     position: absolute;
     top: 50%;
     left: 30%;
@@ -89,7 +89,7 @@ body {
     object-fit: contain;
 }
 
-.apple-login-label {
+.github-login-label {
     white-space: nowrap;
     display: flex;
     position: absolute;
@@ -98,7 +98,7 @@ body {
     transform: translate(-50%, -50%);
 }
 
-.apple-login-btn {
+.github-login-btn {
     position:absolute;
     top:36%; left:50%;
     transform: translateX(-50%);
@@ -116,7 +116,7 @@ body {
     text-shadow: 0.1vw 0.1vw 0.3vw rgba(0, 0, 0, 0.6);
 }
 
-.apple-login-btn:hover {
+.github-login-btn:hover {
     background-color: rgba(10,72,40,0.4);
     font-weight: bold;
 }
