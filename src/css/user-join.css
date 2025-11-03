@@ -2,7 +2,7 @@ body {
     margin: 0;
     font-family: sans-serif;
     background: #fff;
-    padding-top: 10vmin;
+    padding-top: 15vmin;
 }
 
 .join-container {
@@ -134,7 +134,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 10vmin;
+    height: 15vmin;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -145,7 +145,8 @@ body {
 }
 
 .navbar .logo {
-    font-size: 2.5vmin;
+    font-family: 'Arial', sans-serif;
+    font-size: 3vmin;
     font-weight: bold;
     color: white;
     white-space: nowrap;
@@ -161,3 +162,25 @@ body {
     text-decoration: underline; /* 想要悬停效果可以加 */
 }
 
+.my-account {
+    position:absolute; top: 50%; right: 8%;
+    transform: translateY(-50%);
+    font-size: 2.5vmin;
+    white-space: nowrap;
+    width:20vmin; height:9vmin;
+    background-color: rgba(255,255,255,0.4);
+    color: white;
+    border-radius: 2vw;
+    border: 0.3vw ridge rgba(255,255,255,0.45);
+    box-shadow: 0 0 1vw rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(0,0,0,0.3);
+    backdrop-filter: blur(1.2vw) brightness(120%);
+    -webkit-backdrop-filter: blur(1.2vw) brightness(120%);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.my-account:hover {
+    background-color: rgba(255,255,255,0.6);
+}

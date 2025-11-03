@@ -38,5 +38,6 @@ document.getElementById("startBtn").addEventListener("click", () => {
 });
 
 document.getElementById("logInBtn").addEventListener("click", () => {
+    localStorage.setItem("from", "guest-join.html logInBtn")
     window.location.href = "login.html";
 })

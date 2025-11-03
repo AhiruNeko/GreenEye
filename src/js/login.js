@@ -10,12 +10,25 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const googleLogin = document.getElementById("GoogleLoginBtn");
 const githubLogin = document.getElementById("GithubLoginBtn");
-const guestBtn = document.getElementById("guestBtn");
+const guestBtn = document.getElementById("guestBtn")
+
+let callbackUserURL = "index.html";
+let callbackGuestURL = "index.html";
+let from = localStorage.getItem("from");
+if (from == "index.html contributionBtn") {
+    callbackUserURL = "user-join.html";
+    callbackGuestURL = "guest-join.html";
+} else if (from == "guest-join.html logInBtn") {
+    callbackUserURL = "user-join.html";
+    callbackGuestURL = "guest-join.html";
+}
 
 googleLogin.addEventListener('click', async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
-        options: { redirectTo: replaceLastPathSegment("user-join.html") }
+        options: {
+            redirectTo: replaceLastPathSegment(callbackUserURL)
+        }
     });
     if (error) console.error('Google login error:', error);
 });
@@ -23,7 +36,7 @@ googleLogin.addEventListener('click', async () => {
 githubLogin.addEventListener('click', async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'github',
-        options: { redirectTo: replaceLastPathSegment("user-join.html") }
+        options: { redirectTo: replaceLastPathSegment(callbackURL) }
     });
     if (error) console.error('Github login error:', error);
 });
@@ -34,8 +47,9 @@ function continueAsGuest() {
     localStorage.removeItem('userName');
     localStorage.removeItem('userEmail');
     sessionStorage.clear();
-    window.location.href = 'guest-join.html';
+    window.location.href = callbackGuestURL;
 }
+
 guestBtn.addEventListener("click", continueAsGuest);
 window.addEventListener('load', async () => {
     const { data: { session } } = await supabase.auth.getSession();
