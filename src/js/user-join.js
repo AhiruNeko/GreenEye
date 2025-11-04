@@ -1,7 +1,9 @@
 const uploadInput = document.getElementById("uploadPhoto");
 const previewImage = document.getElementById("previewImage");
 const uploadHint = document.getElementById("uploadHint");
-import {supabase} from "./supabase.js";
+import {supabase, checkAuthAndRedirect} from "./supabase.js";
+
+checkAuthAndRedirect();
 
 window.addEventListener("load", async () => {
     const { data: { user } } = await supabase.auth.getUser();

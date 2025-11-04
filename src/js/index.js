@@ -38,15 +38,23 @@ document.getElementById("learnMoreBtn").addEventListener("click", () => {
     window.location.href = "learn-more.html";
 })
 
-fetch('assets/data/data.json')
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById('chemicalData').textContent = data.chemical + 'g';
-        document.getElementById('carbonData').textContent = data.carbon + 'kg';
-        document.getElementById('waterData').textContent = data.water + 'L';
-        document.getElementById('soilData').textContent = data.soil + 'm²';
-    })
-    .catch(error => console.error('Error loading JSON:', error));
+async function fetchData(created_at) {
+    const {data, error} = await supabase
+        .from("total_environmental_data")
+        .select("*")
+        .eq("created_at", created_at);
+    console.log(data);
+    console.log(error);
+    if (error || data.length === 0) { return null; }
+    return data[0];
+}
+
+fetchData("2025-11-04T08:08:49Z").then(data => {
+    document.getElementById('chemicalData').textContent = data.chemical + 'g';
+    document.getElementById('carbonData').textContent = data.carbon + 'kg';
+    document.getElementById('waterData').textContent = data.water + 'L';
+    document.getElementById('soilData').textContent = data.soil + 'm²';
+})
 
 document.addEventListener("DOMContentLoaded", () => {
     const allElements = Array.from(document.querySelectorAll("body *"));

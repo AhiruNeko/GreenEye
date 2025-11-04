@@ -13,10 +13,14 @@ if (from == "index.html contributionBtn") {
 } else if (from == "guest-join.html logInBtn") {
     callbackUserURL = "user-join.html";
     callbackGuestURL = "guest-join.html";
+} else if (from == "my-account-settings.html logOutBtn") {
+    callbackUserURL = "my-account.html";
+    callbackGuestURL = "index.html";
 } else {
     callbackUserURL = "index.html";
     callbackGuestURL = "index.html";
 }
+localStorage.setItem("from", "default");
 
 googleLogin.addEventListener('click', async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({
