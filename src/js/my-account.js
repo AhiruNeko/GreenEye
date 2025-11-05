@@ -4,6 +4,26 @@ checkAuthAndRedirect();
 
 console.log(window.location.pathname);
 
+const menuBtn = document.getElementById('menuBtn');
+const sidebar = document.querySelector('.sidebar');
+const mainContent = document.querySelector('.main-content');
+
+menuBtn.addEventListener('click', (event) => {
+    event.stopPropagation();
+    sidebar.classList.toggle('open');
+    mainContent.classList.toggle('shifted');
+});
+
+document.addEventListener('click', (event) => {
+    const clickedInsideSidebar = sidebar.contains(event.target);
+    const clickedMenuButton = menuBtn.contains(event.target);
+
+    if (!clickedInsideSidebar && !clickedMenuButton && sidebar.classList.contains('open')) {
+        sidebar.classList.remove('open');
+        mainContent.classList.remove('shifted');
+    }
+});
+
 if (window.location.pathname.endsWith("my-account.html")) {
     window.addEventListener("load", async () => {
         const {data: {user}} = await supabase.auth.getUser();
@@ -19,26 +39,6 @@ if (window.location.pathname.endsWith("my-account.html")) {
         document.getElementById("fullName").textContent = fullName;
         document.getElementById("moreAboutAccount").href = iss;
     })
-
-    const menuBtn = document.getElementById('menuBtn');
-    const sidebar = document.querySelector('.sidebar');
-    const mainContent = document.querySelector('.main-content');
-
-    menuBtn.addEventListener('click', (event) => {
-        event.stopPropagation();
-        sidebar.classList.toggle('open');
-        mainContent.classList.toggle('shifted');
-    });
-
-    document.addEventListener('click', (event) => {
-        const clickedInsideSidebar = sidebar.contains(event.target);
-        const clickedMenuButton = menuBtn.contains(event.target);
-
-        if (!clickedInsideSidebar && !clickedMenuButton && sidebar.classList.contains('open')) {
-            sidebar.classList.remove('open');
-            mainContent.classList.remove('shifted');
-        }
-    });
 }
 
 if (window.location.pathname.endsWith("my-account-settings.html")) {
