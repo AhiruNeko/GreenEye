@@ -11,7 +11,6 @@ const mainContent = document.querySelector('.main-content');
 menuBtn.addEventListener('click', (event) => {
     event.stopPropagation();
     sidebar.classList.toggle('open');
-    mainContent.classList.toggle('shifted');
 });
 
 document.addEventListener('click', (event) => {
@@ -20,7 +19,6 @@ document.addEventListener('click', (event) => {
 
     if (!clickedInsideSidebar && !clickedMenuButton && sidebar.classList.contains('open')) {
         sidebar.classList.remove('open');
-        mainContent.classList.remove('shifted');
     }
 });
 
