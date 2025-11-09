@@ -79,7 +79,6 @@ function updatePage() {
             currentElement.classList.remove("visible");
             currentElement.addEventListener("transitionend", () => {
                 currentElement.style.display = "none";
-                targetElement.style.display = "flex";
                 targetElement.classList.add("visible");
             }, { once: true });
         });
