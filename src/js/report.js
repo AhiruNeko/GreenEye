@@ -64,7 +64,7 @@ function updatePage() {
 
     if (count === 0) {
         targetElement.style.display = "flex";
-        targetElement.style.transition = "opacity 8s ease";
+        targetElement.style.transition = "opacity 5s ease";
         requestAnimationFrame(() => {
             targetElement.classList.add("visible");
             animations[pages[count]]?.(targetElement);
