@@ -63,7 +63,6 @@ function updatePage() {
     const targetElement = document.getElementById(pages[count]);
 
     if (count === 0) {
-        targetElement.style.display = "flex";
         targetElement.style.transition = "opacity 5s ease";
         requestAnimationFrame(() => {
             targetElement.classList.add("visible");
@@ -75,12 +74,10 @@ function updatePage() {
         currentElement.style.transition = "";
 
         requestAnimationFrame(() => {
-            targetElement.style.display = "flex";
             currentElement.classList.remove("visible");
-            currentElement.addEventListener("transitionend", () => {
-                currentElement.style.display = "none";
+            setTimeout(() => {
                 targetElement.classList.add("visible");
-            }, { once: true });
+            }, 2000);
         });
     }
 }

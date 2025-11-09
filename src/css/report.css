@@ -12,17 +12,18 @@ html, body {
 }
 
 .page {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     justify-content: center;
     opacity: 0;
     transition: opacity 2s ease;
-    display: none;
+    display: flex;
 }
 
 .page.visible {
     opacity: 1;
-    display: flex;
 }
 
 .click-prompt {
