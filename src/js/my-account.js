@@ -6,7 +6,6 @@ console.log(window.location.pathname);
 
 const menuBtn = document.getElementById('menuBtn');
 const sidebar = document.querySelector('.sidebar');
-const mainContent = document.querySelector('.main-content');
 
 menuBtn.addEventListener('click', (event) => {
     event.stopPropagation();

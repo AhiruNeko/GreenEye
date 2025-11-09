@@ -15,12 +15,12 @@ if (userImage) {
 }
 
 document.getElementById("generateBtn").addEventListener("click", () => {
-    const veg = document.getElementById("vegetableSelect").value;
+    const veg = document.getElementById("foodSelect").value;
     if(!userName || !userImage) {
         alert("Please provide your name and upload a photo first.");
         return;
     }
-    alert(`Generating report for ${userName}, vegetable: ${veg}`);
+    window.location.href = "report.html";
 });
 
 const pureBase64 = userImage.split(",")[1];
