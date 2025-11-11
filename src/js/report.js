@@ -50,7 +50,8 @@ const pages = [
     "pageChemical"
 ];
 const animations = {
-    "pageKeywords": animatePageKeywords
+    "pageKeywords": animatePageKeywords,
+    "pageChemical": animatePageChemical
 }
 updatePage();
 
@@ -70,14 +71,15 @@ function updatePage() {
         });
     } else {
         const currentElement = document.getElementById(pages[count - 1]);
-        targetElement.style.transition = "";
+        targetElement.style.transition = "opacity 3s ease";
         currentElement.style.transition = "";
 
         requestAnimationFrame(() => {
             currentElement.classList.remove("visible");
             setTimeout(() => {
                 targetElement.classList.add("visible");
-            }, 2000);
+                animations[pages[count]]?.(targetElement);
+            }, 2400);
         });
     }
 }
@@ -119,3 +121,113 @@ function chemicalReduction() {
 }
 
 document.getElementById("chemicalData").textContent = chemicalReduction() + "g";
+
+function generateChemicalElements(containerId, repeat = 3) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const images = [
+        'assets/report/chemicalElement1.svg',
+        'assets/report/chemicalElement2.svg',
+        'assets/report/chemicalElement3.svg',
+        'assets/report/chemicalElement4.svg'
+    ];
+    container.innerHTML = '';
+    for (let i = 0; i < repeat; i++) {
+        images.forEach(src => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.className = 'chemical-element';
+            container.appendChild(img);
+        });
+    }
+}
+
+generateChemicalElements("chemicalContainer1", 3);
+generateChemicalElements("chemicalContainer2", 3);
+generateChemicalElements("chemicalContainer3", 3);
+
+function startChemicalAnimation(containerId, direction = 'right', speed = 1.5) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    const maxDisappear = 5;
+
+    const elements = Array.from(container.querySelectorAll('.chemical-element'));
+    if (elements.length === 0) return;
+
+    const containerWidth = 200; // vw
+    const spacing = containerWidth / elements.length;
+
+    elements.forEach((el, i) => {
+        el.style.left = spacing * i + 'vw';
+        el.style.opacity = 1;
+        el.style.filter = 'blur(0vw)';
+        el.dataset.visible = 'true';
+        el.style.transition = "opacity 2s ease, filter 2s ease";
+    });
+
+    const disappearTimer = setInterval(() => {
+        const disappearedCount = elements.filter(el => el.dataset.visible === 'false').length;
+        const toDisappear = Math.max(0, maxDisappear - disappearedCount);
+        if (toDisappear === 0) return;
+
+        const candidates = elements.filter(el => {
+            const left = parseFloat(el.style.left);
+            const elWidthVw = el.offsetWidth / window.innerWidth * 100;
+            return left + elWidthVw > 0 && left < containerWidth && el.dataset.visible === 'true';
+        });
+
+        for (let i = 0; i < toDisappear; i++) {
+            if (candidates.length === 0) break;
+            const index = Math.floor(Math.random() * candidates.length);
+            const el = candidates.splice(index, 1)[0];
+            el.style.opacity = 0;
+            el.style.filter = 'blur(1vw)';
+            el.dataset.visible = 'false';
+        }
+    }, 500);
+
+    let running = true;
+
+    function animate() {
+        const page = document.getElementById('pageChemical');
+        const opacity = parseFloat(getComputedStyle(page).opacity);
+        const visible = opacity > 0.05;
+
+        if (visible) {
+            elements.forEach(el => {
+                let left = parseFloat(el.style.left);
+                if (direction === 'left') {
+                    left -= speed * 0.016;
+                    if (left + (el.offsetWidth / window.innerWidth * 100) < 0) {
+                        left += spacing * elements.length;
+                        el.style.opacity = 1;
+                        el.style.filter = 'blur(0vw)';
+                        el.dataset.visible = 'true';
+                    }
+                } else if (direction === 'right') {
+                    left += speed * 0.016;
+                    if (left > containerWidth) {
+                        left -= spacing * elements.length;
+                        el.style.opacity = 1;
+                        el.style.filter = 'blur(0vw)';
+                        el.dataset.visible = 'true';
+                    }
+                }
+                el.style.left = left + 'vw';
+            });
+        }
+        if (running) requestAnimationFrame(animate);
+    }
+    animate();
+    return () => {
+        running = false;
+        clearInterval(disappearTimer);
+    };
+}
+
+function animatePageChemical() {
+    startChemicalAnimation("chemicalContainer1");
+    startChemicalAnimation("chemicalContainer2", "left", 1.8);
+    startChemicalAnimation("chemicalContainer3", "right", 2.1);
+}
