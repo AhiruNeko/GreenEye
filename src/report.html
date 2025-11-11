@@ -41,15 +41,47 @@
     </div>
 
     <div class="page-carbon page" id="pageCarbon">
-        <img src="assets/report/carbonBg.png" class="bg-img" id="pageCarbonBg">
+        <video autoplay loop muted playsinline class="bg-img" id="pageCarbonBg">
+            <source src="assets/report/carbonBg.mp4" type="video/mp4">
+        </video>
         <label class="carbon-data" id="carbonData"></label>
-        <label class="carbon-text" id="carbonText">of carbon</br>emission</br>reduction</label>
+        <label class="carbon-text" id="carbonText">
+            of carbon</br>emission</br>reduction
+        </label>
         <label class="carbon-description" id="carbonDescription">
             Organic farming methods use fewer fossil fuels and promote carbon sequestration.
             Additionally, by buying local organic food can reduce transportation carbon emission.
             This contribution significantly combats climate change by reducing overall greenhouse gas emissions.
         </label>
         <label class="click-prompt">Click anywhere to continue</label>
+    </div>
+
+    <div class="page-water page" id="pageWater">
+        <img src="assets/report/waterBg.png" class="bg-img" id="pageWaterBg">
+        <label class="water-data" id="waterData"></label>
+        <label class="water-text" id="waterText">
+            of precious clean water</br>has been saved
+        </label>
+        <label class="water-description" id="waterDescription">
+            Organic farming typically uses water more efficiently through sustainable practices like improved soil health and reduced water waste.
+            Your support on organic food help conserve vital water resources, especially in regions facing water scarcity.
+            This small change has a big impact on preserving freshwater for future generations.
+        </label>
+        <label class="white-click click-prompt">Click anywhere to continue</label>
+    </div>
+
+    <div class="page-soil page" id="pageSoil">
+        <img src="assets/report/soilBg.png" class="bg-img" id="pageSoilBg">
+        <label class="soil-data" id="soilData"></label>
+        <label class="soil-text" id="soilText">
+            of healthy soil has been protected,</br>and been full of vitality
+        </label>
+        <label class="soil-description" id="soilDescription">
+            Organic farming nurtures soil health by using natural fertilizers and crop rotations, preventing soil degradation and enhancing its fertility.
+            Your support contributes to soil protection and sustainable agriculture.
+            Healthy soil also stores more carbon, helping to fight climate change.
+        </label>
+        <label class="white-click click-prompt">Click anywhere to continue</label>
     </div>
 
 <script src="js/report.js"></script>

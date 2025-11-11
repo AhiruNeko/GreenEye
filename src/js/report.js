@@ -48,7 +48,9 @@ let count = 0;
 const pages = [
     "pageKeywords",
     "pageChemical",
-    "pageCarbon"
+    "pageCarbon",
+    "pageWater",
+    "pageSoil"
 ];
 const animations = {
     "pageKeywords": animatePageKeywords,
@@ -70,6 +72,15 @@ function updatePage() {
             targetElement.classList.add("visible");
             animations[pages[count]]?.(targetElement);
         });
+    } else if (count === 5) {
+        const currentElement = document.getElementById(pages[count - 1]);
+        currentElement.style.transition = "";
+        requestAnimationFrame(() => {
+            currentElement.classList.remove("visible");
+            setTimeout(() => {
+                window.location.href = "summary.html";
+            }, 2000);
+        })
     } else {
         const currentElement = document.getElementById(pages[count - 1]);
         targetElement.style.transition = "opacity 3s ease";
@@ -80,7 +91,7 @@ function updatePage() {
             setTimeout(() => {
                 targetElement.classList.add("visible");
                 animations[pages[count]]?.(targetElement);
-            }, 2400);
+            }, 2100);
         });
     }
 }
@@ -147,7 +158,7 @@ generateChemicalElements("chemicalContainer1", 3);
 generateChemicalElements("chemicalContainer2", 3);
 generateChemicalElements("chemicalContainer3", 3);
 
-function startChemicalAnimation(containerId, direction = 'right', speed = 1.5) {
+function startChemicalAnimation(containerId, direction = 'right', speed = 2.5) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
@@ -187,7 +198,7 @@ function startChemicalAnimation(containerId, direction = 'right', speed = 1.5) {
                 if (remaining <= 3) break;
             }
         }, 1000);
-    }, 1000);
+    }, 800);
 
     let running = true;
 
@@ -230,8 +241,12 @@ function startChemicalAnimation(containerId, direction = 'right', speed = 1.5) {
 
 function animatePageChemical() {
     startChemicalAnimation("chemicalContainer1");
-    startChemicalAnimation("chemicalContainer2", "left", 1.8);
-    startChemicalAnimation("chemicalContainer3", "right", 2.1);
+    startChemicalAnimation("chemicalContainer2", "left", 2.8);
+    startChemicalAnimation("chemicalContainer3", "right", 3.1);
 }
 
 document.getElementById("carbonData").textContent = calculateReduction([0.2, 1], [50, 120], 2) + 'g';
+
+document.getElementById("waterData").textContent = calculateReduction([0.2, 1], [30, 60], 2) + "L";
+
+document.getElementById("soilData").textContent = calculateReduction([0.2, 1], [1.7, 2.5], 3) + "m²";
