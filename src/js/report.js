@@ -47,7 +47,8 @@ document.getElementById("description2").textContent = kw2.desc;
 let count = 0;
 const pages = [
     "pageKeywords",
-    "pageChemical"
+    "pageChemical",
+    "pageCarbon"
 ];
 const animations = {
     "pageKeywords": animatePageKeywords,
@@ -108,19 +109,19 @@ function randomNormal(mean, stdDev) {
     return z0 * stdDev + mean;
 }
 
-function chemicalReduction() {
-    const weightKgMean = (0.2 + 1) / 2;
-    const weightKgStd = (1 - 0.2) / 6;
-    const chemicalReductionMean = (0.21 + 0.5) / 2;
-    const chemicalReductionStd = (0.5 - 0.21) / 6;
-    const weightKg = randomNormal(weightKgMean, weightKgStd);
-    const chemicalReductionGPerKg = randomNormal(chemicalReductionMean, chemicalReductionStd);
-    const validWeightKg = Math.min(Math.max(weightKg, 0.2), 1);
-    const validChemicalReductionGPerKg = Math.min(Math.max(chemicalReductionGPerKg, 0.21), 0.5);
-    return (validWeightKg * validChemicalReductionGPerKg).toFixed(4);
+function calculateReduction(range1, range2, digits=4) {
+    const mean1 = (range1[0] + range1[1]) / 2;
+    const std1 = (range1[1] - range1[0]) / 6;
+    const mean2 = (range2[0] + range2[1]) / 2;
+    const std2 = (range2[1] - range2[0]) / 6;
+    const var1 = randomNormal(mean1, std1);
+    const var2 = randomNormal(mean2, std2);
+    const validVar1 = Math.min(Math.max(var1, range1[0]), range1[1]);
+    const validVar2 = Math.min(Math.max(var2, range2[0]), range2[1]);
+    return (validVar1 * validVar2).toFixed(digits);
 }
 
-document.getElementById("chemicalData").textContent = chemicalReduction() + "g";
+document.getElementById("chemicalData").textContent = calculateReduction([0.2, 1], [0.21, 0.5]) + "g";
 
 function generateChemicalElements(containerId, repeat = 3) {
     const container = document.getElementById(containerId);
@@ -150,12 +151,10 @@ function startChemicalAnimation(containerId, direction = 'right', speed = 1.5) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    const maxDisappear = 5;
-
     const elements = Array.from(container.querySelectorAll('.chemical-element'));
     if (elements.length === 0) return;
 
-    const containerWidth = 200; // vw
+    const containerWidth = 200;
     const spacing = containerWidth / elements.length;
 
     elements.forEach((el, i) => {
@@ -166,26 +165,29 @@ function startChemicalAnimation(containerId, direction = 'right', speed = 1.5) {
         el.style.transition = "opacity 2s ease, filter 2s ease";
     });
 
-    const disappearTimer = setInterval(() => {
-        const disappearedCount = elements.filter(el => el.dataset.visible === 'false').length;
-        const toDisappear = Math.max(0, maxDisappear - disappearedCount);
-        if (toDisappear === 0) return;
-
-        const candidates = elements.filter(el => {
-            const left = parseFloat(el.style.left);
-            const elWidthVw = el.offsetWidth / window.innerWidth * 100;
-            return left + elWidthVw > 0 && left < containerWidth && el.dataset.visible === 'true';
-        });
-
-        for (let i = 0; i < toDisappear; i++) {
-            if (candidates.length === 0) break;
-            const index = Math.floor(Math.random() * candidates.length);
-            const el = candidates.splice(index, 1)[0];
-            el.style.opacity = 0;
-            el.style.filter = 'blur(1vw)';
-            el.dataset.visible = 'false';
-        }
-    }, 500);
+    let disappearTimer = null;
+    setTimeout(() => {
+        disappearTimer = setInterval(() => {
+            let candidates = elements.filter(el => {
+                const left = parseFloat(el.style.left);
+                return left > 50 && left < 150 && el.dataset.visible === 'true';
+            });
+            if (candidates.length <= 3) return;
+            candidates = candidates.sort(() => Math.random() - 0.5);
+            let count = 0;
+            for (let i = 0; i < candidates.length; i++) {
+                const el = candidates[i];
+                if (Math.random() < 0.2) {
+                    el.style.opacity = 0;
+                    el.style.filter = 'blur(1vw)';
+                    el.dataset.visible = 'false';
+                    count++;
+                }
+                const remaining = candidates.length - count;
+                if (remaining <= 3) break;
+            }
+        }, 1000);
+    }, 1000);
 
     let running = true;
 
@@ -231,3 +233,5 @@ function animatePageChemical() {
     startChemicalAnimation("chemicalContainer2", "left", 1.8);
     startChemicalAnimation("chemicalContainer3", "right", 2.1);
 }
+
+document.getElementById("carbonData").textContent = calculateReduction([0.2, 1], [50, 120], 2) + 'g';
