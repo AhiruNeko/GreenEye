@@ -74,22 +74,33 @@ shareBtn.addEventListener("click", async () => {
         useCORS: true,
         backgroundColor: "#ffffff"
     });
+
     const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
     const file = new File([blob], "report.png", { type: "image/png" });
     const url = URL.createObjectURL(blob);
     reportImg.src = url;
     reportImg.style.display = "block";
+
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        try {
-            await navigator.share({
-                title: "My Report",
-                text: "Check out this report!",
-                files: [file]
-            });
-            return;
-        } catch (err) {
-            console.warn("用户取消或分享出错：", err);
-        }
+        await navigator.share({
+            title: "My Report",
+            text: "Check out this report!",
+            files: [file]
+        });
+        return;
     }
+
+    const proceed = confirm(
+        "Your current browser does not support system sharing. Click \"Confirm\" to download the image, click \"Cancel\" to try sharing it on another browser."
+    );
+    if (!proceed) return;
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "report.png";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
 });
+
 
