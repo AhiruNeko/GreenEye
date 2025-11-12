@@ -74,3 +74,12 @@ function replaceLastPathSegment(newSegment, url = window.location.href) {
     urlObj.pathname = segments.join('/');
     return urlObj.toString();
 }
+
+localStorage.removeItem("image");
+localStorage.removeItem("chemicalData");
+localStorage.removeItem("carbonData");
+localStorage.removeItem("waterData");
+localStorage.removeItem("soilData");
+localStorage.removeItem("keywords");
+localStorage.removeItem("food");
+localStorage.removeItem("joinPage");

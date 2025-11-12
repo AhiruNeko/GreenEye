@@ -55,3 +55,12 @@ if (window.location.pathname.endsWith("my-account-settings.html")) {
         window.location.href = 'login.html'
     }
 }
+
+localStorage.removeItem("image");
+localStorage.removeItem("chemicalData");
+localStorage.removeItem("carbonData");
+localStorage.removeItem("waterData");
+localStorage.removeItem("soilData");
+localStorage.removeItem("keywords");
+localStorage.removeItem("food");
+localStorage.removeItem("joinPage");

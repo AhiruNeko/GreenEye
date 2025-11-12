@@ -17,6 +17,22 @@ if (missing.length > 0) {
     else window.location.href = "index.html";
 }
 
+const items = document.querySelectorAll("#summaryPage *");
+
+items.forEach((item, index) => {
+    item.style.opacity = "0";
+    item.style.filter = "blur(20px)";
+    item.style.transition = "opacity 1.5s ease, filter 1.5s ease";
+
+    // 错峰出现
+    setTimeout(() => {
+        item.style.opacity = "1";
+        item.style.filter = "blur(0)";
+    }, index * 500);
+});
+
+
+
 document.getElementById("username").textContent = "@" + localStorage.getItem("name");
 document.getElementById("userImg").src = localStorage.getItem("image");
 
@@ -32,33 +48,16 @@ document.getElementById("contribution").innerHTML = "My contributions: </br><spa
 
 async function generateReportImage(containerId = "reportGenerator", imgId = "reportImg") {
     const container = document.getElementById(containerId);
-    container.style.opacity = "1";
     const imgEl = document.getElementById(imgId);
 
     if (!container || !imgEl) return;
+    const canvas = await html2canvas(container, {
+        backgroundColor: null,
+        scale: 2
+    });
 
-    try {
-        const canvas = await html2canvas(container, {
-            backgroundColor: null,
-            scale: 2
-        });
-
-        const dataURL = canvas.toDataURL("image/png");
-        imgEl.src = dataURL;
-    } catch (err) {
-        console.error("生成图片失败:", err);
-    }
-}
-
-async function downloadReportImage(filename = "report.png") {
-    const container = document.getElementById("reportGenerator");
-    if (!container) return;
-
-    const canvas = await html2canvas(container, { backgroundColor: null, scale: 2 });
-    const link = document.createElement("a");
-    link.href = canvas.toDataURL("image/png");
-    link.download = filename;
-    link.click();
+    const dataURL = canvas.toDataURL("image/png");
+    imgEl.src = dataURL;
 }
 
 generateReportImage();
@@ -103,4 +102,18 @@ shareBtn.addEventListener("click", async () => {
     document.body.removeChild(a);
 });
 
+document.getElementById("doneBtn").addEventListener("click", () => {
+    localStorage.removeItem("image");
+    localStorage.removeItem("chemicalData");
+    localStorage.removeItem("carbonData");
+    localStorage.removeItem("waterData");
+    localStorage.removeItem("soilData");
+    localStorage.removeItem("keywords");
+    localStorage.removeItem("food");
+    localStorage.removeItem("joinPage");
+    window.location.href = "index.html";
+});
 
+document.getElementById("learnMoreBtn").addEventListener("click", () => {
+    window.open("learn-more.html", "_blank");
+})
