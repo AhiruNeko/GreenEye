@@ -1,44 +1,23 @@
-const keywordsWithPoeticDesc = [
-    { keyword: "Carbon Saver", desc: "Breathing lighter for the Earth." },
-    { keyword: "Green Soul", desc: "Heart rooted in nature's embrace." },
-    { keyword: "Earth Friend", desc: "Walking gently upon the land." },
-    { keyword: "Nature Ally", desc: "Standing with forests and streams." },
-    { keyword: "Water Keeper", desc: "Guarding rivers and quiet lakes." },
-    { keyword: "Soil Healer", desc: "Nurturing life beneath our feet." },
-    { keyword: "Eco Helper", desc: "Whispering care to every leaf." },
-    { keyword: "Clean Choice", desc: "Choosing paths the Earth would smile at." },
-    { keyword: "Planet Supporter", desc: "Lifting the planet, one act at a time." },
-    { keyword: "Organic Believer", desc: "Trusting in the gifts of nature." },
-    { keyword: "Nature Guardian", desc: "Watching over hills and meadows." },
-    { keyword: "Eco Dreamer", desc: "Dreaming of forests untouched by time." },
-    { keyword: "Local Supporter", desc: "Rooted in the hands that sow." },
-    { keyword: "Soil Protector", desc: "Shielding the cradle of life below." },
-    { keyword: "Blue Earth", desc: "Honoring oceans and crystal streams." },
-    { keyword: "Eco Spirit", desc: "Living with the whisper of leaves." },
-    { keyword: "Green Guardian", desc: "A sentinel for the shaded groves." },
-    { keyword: "Earth Helper", desc: "Lending hands to quiet fields." },
-    { keyword: "Pure Grower", desc: "Tending life in untamed soil." },
-    { keyword: "Water Saver", desc: "Capturing the gift of rain." },
-    { keyword: "Fresh Mind", desc: "Breathing clarity through green thoughts." },
-    { keyword: "Eco Minded", desc: "Thinking in harmony with the wild." },
-    { keyword: "Sustain Hero", desc: "Championing life for years to come." },
-    { keyword: "Eco Friend", desc: "Walking softly among the flowers." },
-    { keyword: "Nature Saver", desc: "Preserving whispers of the forest." },
-    { keyword: "Clean Planet", desc: "Wiping away the dust of time." },
-    { keyword: "Green Action", desc: "Turning hands into growing green." },
-    { keyword: "Earth Hero", desc: "Guarding every hill and vale." },
-    { keyword: "Eco Partner", desc: "Joining forces with sky and soil." },
-    { keyword: "Nature Keeper", desc: "Holding balance in gentle palms." }
+const requiredKeys = [
+    "name",
+    "image",
+    "keywords",
+    "chemicalData",
+    "carbonData",
+    "waterData",
+    "soilData",
+    "joinPage",
+    "food"
 ];
 
-function getRandomKeywords() {
-    const shuffled = [...keywordsWithPoeticDesc].sort(() => Math.random() - 0.5);
-    const first = shuffled[0];
-    const second = shuffled[1];
-    return [first, second];
+const missing = requiredKeys.filter(key => !localStorage.getItem(key));
+
+if (missing.length > 0) {
+    if (localStorage.getItem("joinPage")) window.location.href = localStorage.getItem("joinPage");
+    else window.location.href = "index.html";
 }
 
-const [kw1, kw2] = getRandomKeywords();
+const [kw1, kw2] = JSON.parse(localStorage.getItem("keywords"));
 document.getElementById("keyword1").textContent = kw1.keyword;
 document.getElementById("keyword2").textContent = kw2.keyword;
 document.getElementById("description1").textContent = kw1.desc;
@@ -112,27 +91,6 @@ function animatePageKeywords(el) {
         }, index * 500);
     });
 }
-
-function randomNormal(mean, stdDev) {
-    const u1 = Math.random();
-    const u2 = Math.random();
-    const z0 = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
-    return z0 * stdDev + mean;
-}
-
-function calculateReduction(range1, range2, digits=4) {
-    const mean1 = (range1[0] + range1[1]) / 2;
-    const std1 = (range1[1] - range1[0]) / 6;
-    const mean2 = (range2[0] + range2[1]) / 2;
-    const std2 = (range2[1] - range2[0]) / 6;
-    const var1 = randomNormal(mean1, std1);
-    const var2 = randomNormal(mean2, std2);
-    const validVar1 = Math.min(Math.max(var1, range1[0]), range1[1]);
-    const validVar2 = Math.min(Math.max(var2, range2[0]), range2[1]);
-    return (validVar1 * validVar2).toFixed(digits);
-}
-
-document.getElementById("chemicalData").textContent = calculateReduction([0.2, 1], [0.21, 0.5]) + "g";
 
 function generateChemicalElements(containerId, repeat = 3) {
     const container = document.getElementById(containerId);
@@ -245,8 +203,7 @@ function animatePageChemical() {
     startChemicalAnimation("chemicalContainer3", "right", 3.1);
 }
 
-document.getElementById("carbonData").textContent = calculateReduction([0.2, 1], [50, 120], 2) + 'g';
-
-document.getElementById("waterData").textContent = calculateReduction([0.2, 1], [30, 60], 2) + "L";
-
-document.getElementById("soilData").textContent = calculateReduction([0.2, 1], [1.7, 2.5], 3) + "m²";
+document.getElementById("chemicalData").textContent = localStorage.getItem("chemicalData");
+document.getElementById("carbonData").textContent = localStorage.getItem("carbonData");
+document.getElementById("waterData").textContent = localStorage.getItem("waterData");
+document.getElementById("soilData").textContent = localStorage.getItem("soilData");

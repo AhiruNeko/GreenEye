@@ -3,8 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Report Summary</title>
+    <link rel="stylesheet" href="css/summary.css">
 </head>
 <body>
 
+<div class="report-generator page" id="reportGenerator">
+    <img class="bg-img" src="assets/summary/userSaveBg.png">
+    <label class="username" id="username"></label>
+    <label class="title1 title" id="title1">I'm supporting</label>
+    <label class="title2 title" id="title2">LOCAL</br>ORGANIC</br>FOOD!</label>
+    <div class="img-container" id="img-container">
+        <img class="user-img" id="userImg">
+    </div>
+    <label class="keywords" id="keywords"></label>
+    <label class="food-name" id="foodName"></label>
+    <label class="contribution" id="contribution"></label>
+    <label class="promotion" id="promotion">
+        Scan to learn more about</br>
+        us and join us, or visit:</br>
+        <span class="underline">https://greeneye-hk.vercel.app</span>
+    </label>
+    <img src="assets/summary/QRCode.png" class="QRCode" id="QRCode">
+</div>
+
+<div class="summary-page page" id="summaryPage">
+    <img src="assets/summary/summaryBg.png" class="bg-img">
+    <label class="main-title" id="mainTitle">Congratulations!</label>
+    <div class="report-container" id="reportContainer">
+        <img class="report-img" id="reportImg">
+    </div>
+    <button class="share-btn" id="shareBtn">Share</button>
+</div>
+
+<script src="js/summary.js" type="module"></script>
 </body>
 </html>

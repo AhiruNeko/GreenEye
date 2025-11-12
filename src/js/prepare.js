@@ -1,3 +1,23 @@
+const requiredKeys = [
+    "name",
+    "image",
+    "keywords",
+    "chemicalData",
+    "carbonData",
+    "waterData",
+    "soilData",
+    "joinPage"
+];
+
+const missing = requiredKeys.filter(key => !localStorage.getItem(key));
+
+if (missing.length > 0) {
+    if (localStorage.getItem("joinPage")) window.location.href = localStorage.getItem("joinPage");
+    else window.location.href = "index.html";
+}
+
+localStorage.removeItem("food");
+
 const userName = localStorage.getItem("name") || "User";
 const userImage = localStorage.getItem("image") || "";
 const loadingOverlay = document.getElementById("loadingOverlay");
@@ -16,10 +36,11 @@ if (userImage) {
 
 document.getElementById("generateBtn").addEventListener("click", () => {
     const veg = document.getElementById("foodSelect").value;
-    if(!userName || !userImage) {
-        alert("Please provide your name and upload a photo first.");
+    if(!veg) {
+        alert("Please enter your food.");
         return;
     }
+    localStorage.setItem("food", veg);
     window.location.href = "report.html";
 });
 
