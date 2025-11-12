@@ -1,7 +1,7 @@
 const navEntries = performance.getEntriesByType("navigation");
 if (navEntries.length > 0) {
     const type = navEntries[0].type;
-    if (type === "navigate") {
+    if (type === "navigate" && !localStorage.getItem("progNav")) {
         localStorage.removeItem("image");
         localStorage.removeItem("chemicalData");
         localStorage.removeItem("carbonData");
@@ -12,6 +12,8 @@ if (navEntries.length > 0) {
         localStorage.removeItem("joinPage");
     }
 }
+
+localStorage.removeItem("progNav");
 
 const requiredKeys = [
     "name",
@@ -72,6 +74,7 @@ function updatePage() {
         requestAnimationFrame(() => {
             currentElement.classList.remove("visible");
             setTimeout(() => {
+                localStorage.setItem("progNav", "true");
                 window.location.href = "summary.html";
             }, 2000);
         })
@@ -171,7 +174,7 @@ function startChemicalAnimation(containerId, direction = 'right', speed = 2.5) {
                 if (remaining <= 3) break;
             }
         }, 1000);
-    }, 800);
+    }, 100);
 
     let running = true;
 

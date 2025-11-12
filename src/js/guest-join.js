@@ -93,25 +93,47 @@ function getRandomKeywords() {
 }
 
 document.getElementById("startBtn").addEventListener("click", () => {
-    const name = document.getElementById("username").value.trim();
     const file = uploadInput.files[0];
-
-    if (!name || !file) {
-        alert("Please enter your name and upload a photo!");
+    if (!file) {
+        alert("Please upload a photo!");
         return;
     }
-
-    localStorage.setItem("name", name);
     localStorage.setItem("keywords", JSON.stringify(getRandomKeywords()));
     localStorage.setItem("chemicalData", calculateReduction([0.2, 1], [0.21, 0.5]) + "g");
     localStorage.setItem("carbonData", calculateReduction([0.2, 1], [50, 120], 2) + 'g');
     localStorage.setItem("waterData", calculateReduction([0.2, 1], [30, 60], 2) + "L");
     localStorage.setItem("soilData", calculateReduction([0.2, 1], [1.7, 2.5], 3) + "m²");
-
+    localStorage.setItem("progNav", "true");
     const reader = new FileReader();
     reader.onload = function(event) {
-        localStorage.setItem("image", event.target.result);
-        window.location.href = "prepare.html";
+        const img = new Image();
+        img.onload = function() {
+            const canvas = document.createElement("canvas");
+            const maxWidth = 1200;
+            const maxHeight = 1200;
+            let width = img.width;
+            let height = img.height;
+            if (width > height) {
+                if (width > maxWidth) {
+                    height = Math.round((height * maxWidth) / width);
+                    width = maxWidth;
+                }
+            } else {
+                if (height > maxHeight) {
+                    width = Math.round((width * maxHeight) / height);
+                    height = maxHeight;
+                }
+            }
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, width, height);
+            const compressedDataUrl = canvas.toDataURL("image/jpeg", 0.8);
+            localStorage.setItem("image", compressedDataUrl);
+            localStorage.setItem("joinPage", "user-join.html");
+            window.location.href = "prepare.html";
+        };
+        img.src = event.target.result;
     };
     reader.readAsDataURL(file);
 });

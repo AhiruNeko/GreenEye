@@ -1,7 +1,7 @@
 const navEntries = performance.getEntriesByType("navigation");
 if (navEntries.length > 0) {
     const type = navEntries[0].type;
-    if (type === "navigate") {
+    if (type === "navigate" && !localStorage.getItem("progNav")) {
         localStorage.removeItem("image");
         localStorage.removeItem("chemicalData");
         localStorage.removeItem("carbonData");
@@ -12,6 +12,8 @@ if (navEntries.length > 0) {
         localStorage.removeItem("joinPage");
     }
 }
+
+localStorage.removeItem("progNav");
 
 const requiredKeys = [
     "name",
