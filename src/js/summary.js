@@ -1,3 +1,18 @@
+const navEntries = performance.getEntriesByType("navigation");
+if (navEntries.length > 0) {
+    const type = navEntries[0].type;
+    if (type === "navigate") {
+        localStorage.removeItem("image");
+        localStorage.removeItem("chemicalData");
+        localStorage.removeItem("carbonData");
+        localStorage.removeItem("waterData");
+        localStorage.removeItem("soilData");
+        localStorage.removeItem("keywords");
+        localStorage.removeItem("food");
+        localStorage.removeItem("joinPage");
+    }
+}
+
 const requiredKeys = [
     "name",
     "image",

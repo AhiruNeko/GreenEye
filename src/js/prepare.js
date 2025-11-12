@@ -1,3 +1,18 @@
+const navEntries = performance.getEntriesByType("navigation");
+if (navEntries.length > 0) {
+    const type = navEntries[0].type;
+    if (type === "navigate") {
+        localStorage.removeItem("image");
+        localStorage.removeItem("chemicalData");
+        localStorage.removeItem("carbonData");
+        localStorage.removeItem("waterData");
+        localStorage.removeItem("soilData");
+        localStorage.removeItem("keywords");
+        localStorage.removeItem("food");
+        localStorage.removeItem("joinPage");
+    }
+}
+
 const requiredKeys = [
     "name",
     "image",
@@ -69,7 +84,16 @@ async function classifyVegetable() {
         const data = await response.json();
         console.log("Roboflow API result:", data);
 
-        const topPrediction = data.top;
+        const options = [
+            "Bean", "Bitter Gourd", "Bottle Gourd", "Brinjal", "Broccoli",
+            "Cabbage", "Capsicum", "Carrot", "Cauliflower", "Cucumber",
+            "Papaya", "Potato", "Pumpkin", "Radish", "Tomato"
+        ];
+        let topPrediction = data.top;
+        if (!topPrediction) {
+            const randomIndex = Math.floor(Math.random() * options.length);
+            topPrediction = options[randomIndex];
+        }
         const selectElement = document.getElementById("foodSelect");
         if (topPrediction && selectElement) {
             selectElement.value = topPrediction.toLowerCase();
