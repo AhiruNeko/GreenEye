@@ -94,10 +94,12 @@ function getRandomKeywords() {
 
 document.getElementById("startBtn").addEventListener("click", () => {
     const file = uploadInput.files[0];
-    if (!file) {
-        alert("Please upload a photo!");
+    const name = document.getElementById("username").value;
+    if (!file || !name) {
+        alert("Please upload a photo and enter your name!");
         return;
     }
+    localStorage.setItem("name", name);
     localStorage.setItem("keywords", JSON.stringify(getRandomKeywords()));
     localStorage.setItem("chemicalData", calculateReduction([0.2, 1], [0.21, 0.5]) + "g");
     localStorage.setItem("carbonData", calculateReduction([0.2, 1], [50, 120], 2) + 'g');
@@ -130,7 +132,7 @@ document.getElementById("startBtn").addEventListener("click", () => {
             ctx.drawImage(img, 0, 0, width, height);
             const compressedDataUrl = canvas.toDataURL("image/jpeg", 0.8);
             localStorage.setItem("image", compressedDataUrl);
-            localStorage.setItem("joinPage", "user-join.html");
+            localStorage.setItem("joinPage", "guest-join.html");
             window.location.href = "prepare.html";
         };
         img.src = event.target.result;

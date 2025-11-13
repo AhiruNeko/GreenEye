@@ -174,13 +174,13 @@ html, body {
 }
 
 .main-title {
-    font-family: 'Arial', sans-serif;
+    font-family: "Allura-Regular", sans-serif;
     color: rgba(10, 72, 40, 1);
     position: absolute;
     top: 7%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 11vw;
+    font-size: 15vw;
     font-weight: bold;
     text-shadow: 0.3vw 0.3vw 0 rgba(0, 0, 0, 0.3);
 }
