@@ -86,6 +86,15 @@ const reportImg = document.getElementById("reportImg");
 const shareBtn = document.getElementById("shareBtn");
 
 shareBtn.addEventListener("click", async () => {
+    let proceed = true;
+
+    if (!navigator.canShare) {
+        proceed = confirm(
+            "Your browser does not support system sharing. Confirm = download; Cancel = try another browser."
+        );
+        if (!proceed) return;
+    }
+
     const canvas = await html2canvas(reportEl, {
         useCORS: true,
         backgroundColor: "#ffffff"
@@ -106,17 +115,10 @@ shareBtn.addEventListener("click", async () => {
         return;
     }
 
-    const proceed = confirm(
-        "Your current browser does not support system sharing. Click \"Confirm\" to download the image, click \"Cancel\" to try sharing it on another browser."
-    );
-    if (!proceed) return;
-
     const a = document.createElement("a");
     a.href = url;
     a.download = "report.png";
-    document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a);
 });
 
 document.getElementById("doneBtn").addEventListener("click", () => {
