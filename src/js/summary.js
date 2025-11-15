@@ -87,25 +87,25 @@ const shareBtn = document.getElementById("shareBtn");
 let url = "";
 
 shareBtn.addEventListener("click", async () => {
-    // const canvas = await html2canvas(reportEl, {
-    //     useCORS: true,
-    //     backgroundColor: "#ffffff"
-    // });
-    //
-    // const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
-    // const file = new File([blob], "report.png", { type: "image/png" });
-    // url = URL.createObjectURL(blob);
-    // reportImg.src = url;
-    // reportImg.style.display = "block";
+    const canvas = await html2canvas(reportEl, {
+        useCORS: true,
+        backgroundColor: "#ffffff"
+    });
 
-    // if (navigator.canShare && navigator.canShare({ files: [file] })) {
-    //     await navigator.share({
-    //         title: "My Report",
-    //         text: "Check out this report!",
-    //         files: [file]
-    //     });
-    //     return;
-    // }
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
+    const file = new File([blob], "report.png", { type: "image/png" });
+    url = URL.createObjectURL(blob);
+    reportImg.src = url;
+    reportImg.style.display = "block";
+
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+            title: "My Report",
+            text: "Check out this report!",
+            files: [file]
+        });
+        return;
+    }
 
     const reminderContainer = document.getElementById("reminderContainer");
     reminderContainer.style.opacity = "0";
