@@ -98,6 +98,7 @@ shareBtn.addEventListener("click", async () => {
     reportImg.src = url;
     reportImg.style.display = "block";
 
+    let needReminder = false;
     try {
         if (navigator.canShare && navigator.canShare({files: [file]})) {
             await navigator.share({
@@ -107,9 +108,14 @@ shareBtn.addEventListener("click", async () => {
             });
             return;
         } else {
-            throw "Share rejected";
+            needReminder = true;
         }
     } catch (e) {
+        alert(e.message);
+        needReminder = true
+    }
+
+    if (needReminder) {
         const reminderContainer = document.getElementById("reminderContainer");
         reminderContainer.style.opacity = "0";
         reminderContainer.style.filter = "blur(20px)";
