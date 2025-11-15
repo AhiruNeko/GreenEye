@@ -111,7 +111,7 @@ shareBtn.addEventListener("click", async () => {
             needReminder = true;
         }
     } catch (e) {
-        alert(e.message);
+        alert(e.name);
         needReminder = true
     }
 
