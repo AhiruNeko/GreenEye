@@ -98,25 +98,28 @@ shareBtn.addEventListener("click", async () => {
     reportImg.src = url;
     reportImg.style.display = "block";
 
-    if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        await navigator.share({
-            title: "My Report",
-            text: "Check out this report!",
-            files: [file]
-        });
-        return;
+    try {
+        if (navigator.canShare && navigator.canShare({files: [file]})) {
+            await navigator.share({
+                title: "My Report",
+                text: "Check out this report!",
+                files: [file]
+            });
+            return;
+        } else {
+            throw "Share rejected";
+        }
+    } catch (e) {
+        const reminderContainer = document.getElementById("reminderContainer");
+        reminderContainer.style.opacity = "0";
+        reminderContainer.style.filter = "blur(20px)";
+        reminderContainer.style.transition = "opacity 0.8s ease, filter 0.8s ease";
+        reminderContainer.style.display = "flex";
+        setTimeout(() => {
+            reminderContainer.style.opacity = "1";
+            reminderContainer.style.filter = "blur(0)";
+        }, 20);
     }
-
-    alert("reminder");
-    // const reminderContainer = document.getElementById("reminderContainer");
-    // reminderContainer.style.opacity = "0";
-    // reminderContainer.style.filter = "blur(20px)";
-    // reminderContainer.style.transition = "opacity 0.8s ease, filter 0.8s ease";
-    // reminderContainer.style.display = "flex";
-    // setTimeout(() => {
-    //     reminderContainer.style.opacity = "1";
-    //     reminderContainer.style.filter = "blur(0)";
-    // }, 20);
 });
 
 document.getElementById("downloadBtn").addEventListener("click", () => {
