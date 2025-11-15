@@ -1,3 +1,5 @@
+import {supabase} from "./supabase.js";
+
 const navEntries = performance.getEntriesByType("navigation");
 if (navEntries.length > 0) {
     const type = navEntries[0].type;
@@ -10,6 +12,7 @@ if (navEntries.length > 0) {
         localStorage.removeItem("keywords");
         localStorage.removeItem("food");
         localStorage.removeItem("joinPage");
+        localStorage.removeItem("saved");
     }
 }
 
@@ -159,9 +162,77 @@ document.getElementById("doneBtn").addEventListener("click", () => {
     localStorage.removeItem("keywords");
     localStorage.removeItem("food");
     localStorage.removeItem("joinPage");
+    localStorage.removeItem("saved");
     window.location.href = "index.html";
 });
 
 document.getElementById("learnMoreBtn").addEventListener("click", () => {
     window.open("learn-more.html", "_blank");
-})
+});
+
+let user_id = "guest";
+if (localStorage.getItem("joinPage") === "user-join.html") {
+    const {data: {session}} = await supabase.auth.getSession();
+    if (session) {
+        user_id = session.user.id;
+    }
+}
+
+if (!localStorage.getItem("saved")) {
+    await supabase
+        .from("user_data")
+        .insert([{
+                user_id: user_id,
+                food_type: localStorage.getItem("food"),
+                chemical_data: parseFloat(localStorage.getItem("chemicalData")),
+                carbon_data: parseFloat(localStorage.getItem("carbonData")),
+                water_data: parseFloat(localStorage.getItem("waterData")),
+                soil_data: parseFloat(localStorage.getItem("soilData")),
+                keywords: localStorage.getItem("keywords")
+        }]);
+
+    const { data, error } = await supabase
+        .from('total_environmental_data')
+        .select('*')
+        .order('id', { ascending: false })
+        .limit(1);
+    console.log(data);
+    const newChemical = limitNumberLength(data[0].chemical + parseFloat(localStorage.getItem("chemicalData")));
+    const newCarbon = limitNumberLength(data[0].carbon + parseFloat(localStorage.getItem("carbonData")));
+    const newWater = limitNumberLength(data[0].water + parseFloat(localStorage.getItem("waterData")));
+    const newSoil = limitNumberLength(data[0].soil + parseFloat(localStorage.getItem("soilData")));
+
+    console.log(newChemical);
+    console.log(newCarbon);
+    console.log(newWater);
+    console.log(newSoil);
+
+    await supabase
+        .from('total_environmental_data')
+        .insert([{
+            chemical: newChemical,
+            carbon: newCarbon,
+            water: newWater,
+            soil: newSoil
+        }]);
+
+    localStorage.setItem("saved", "true");
+}
+
+function limitNumberLength(num, maxLength = 5) {
+    if (isNaN(num)) return 0;
+
+    const sign = Math.sign(num);
+    num = Math.abs(num);
+
+    const intPart = Math.floor(num);
+    const intLen = intPart.toString().length;
+
+    if (intLen >= maxLength) {
+        return sign * intPart;
+    }
+
+    const decimalPlaces = maxLength - intLen;
+    return sign * parseFloat(num.toFixed(decimalPlaces));
+}
+

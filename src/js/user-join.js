@@ -13,6 +13,7 @@ localStorage.removeItem("waterData");
 localStorage.removeItem("soilData");
 localStorage.removeItem("image");
 localStorage.removeItem("keywords");
+localStorage.removeItem("saved");
 
 window.addEventListener("load", async () => {
     const { data: { user } } = await supabase.auth.getUser();

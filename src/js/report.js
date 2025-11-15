@@ -10,6 +10,7 @@ if (navEntries.length > 0) {
         localStorage.removeItem("keywords");
         localStorage.removeItem("food");
         localStorage.removeItem("joinPage");
+        localStorage.removeItem("saved");
     }
 }
 

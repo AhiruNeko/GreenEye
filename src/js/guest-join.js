@@ -11,6 +11,7 @@ localStorage.removeItem("soilData");
 localStorage.removeItem("image");
 localStorage.removeItem("name");
 localStorage.removeItem("keywords");
+localStorage.removeItem("saved");
 
 window.addEventListener("pageshow", () => {
    uploadInput.value = "";
