@@ -104,6 +104,7 @@ shareBtn.addEventListener("click", async () => {
             text: "Check out this report!",
             files: [file]
         });
+        alert("sharing")
         return;
     }
 
