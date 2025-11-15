@@ -107,6 +107,7 @@ shareBtn.addEventListener("click", async () => {
         return;
     }
 
+    alert("reminder");
     const reminderContainer = document.getElementById("reminderContainer");
     reminderContainer.style.opacity = "0";
     reminderContainer.style.filter = "blur(20px)";
