@@ -104,20 +104,19 @@ shareBtn.addEventListener("click", async () => {
             text: "Check out this report!",
             files: [file]
         });
-        alert("sharing")
         return;
     }
 
     alert("reminder");
-    const reminderContainer = document.getElementById("reminderContainer");
-    reminderContainer.style.opacity = "0";
-    reminderContainer.style.filter = "blur(20px)";
-    reminderContainer.style.transition = "opacity 0.8s ease, filter 0.8s ease";
-    reminderContainer.style.display = "flex";
-    setTimeout(() => {
-        reminderContainer.style.opacity = "1";
-        reminderContainer.style.filter = "blur(0)";
-    }, 20);
+    // const reminderContainer = document.getElementById("reminderContainer");
+    // reminderContainer.style.opacity = "0";
+    // reminderContainer.style.filter = "blur(20px)";
+    // reminderContainer.style.transition = "opacity 0.8s ease, filter 0.8s ease";
+    // reminderContainer.style.display = "flex";
+    // setTimeout(() => {
+    //     reminderContainer.style.opacity = "1";
+    //     reminderContainer.style.filter = "blur(0)";
+    // }, 20);
 });
 
 document.getElementById("downloadBtn").addEventListener("click", () => {
