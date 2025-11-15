@@ -34,14 +34,13 @@ if (missing.length > 0) {
     else window.location.href = "index.html";
 }
 
-const items = document.querySelectorAll("#summaryPage *");
+const items = document.querySelectorAll("#summaryPage *:not(#reminderContainer):not(#reminderContainer *)");
 
 items.forEach((item, index) => {
     item.style.opacity = "0";
     item.style.filter = "blur(20px)";
     item.style.transition = "opacity 1.6s ease, filter 1.6s ease";
 
-    // 错峰出现
     setTimeout(() => {
         item.style.opacity = "1";
         item.style.filter = "blur(0)";
@@ -85,32 +84,48 @@ const reportEl = document.getElementById("reportGenerator");
 const reportImg = document.getElementById("reportImg");
 const shareBtn = document.getElementById("shareBtn");
 
+let url = "";
+
 shareBtn.addEventListener("click", async () => {
-    const canvas = await html2canvas(reportEl, {
-        useCORS: true,
-        backgroundColor: "#ffffff"
-    });
+    // const canvas = await html2canvas(reportEl, {
+    //     useCORS: true,
+    //     backgroundColor: "#ffffff"
+    // });
+    //
+    // const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
+    // const file = new File([blob], "report.png", { type: "image/png" });
+    // url = URL.createObjectURL(blob);
+    // reportImg.src = url;
+    // reportImg.style.display = "block";
 
-    const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
-    const file = new File([blob], "report.png", { type: "image/png" });
-    const url = URL.createObjectURL(blob);
-    reportImg.src = url;
-    reportImg.style.display = "block";
+    // if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    //     await navigator.share({
+    //         title: "My Report",
+    //         text: "Check out this report!",
+    //         files: [file]
+    //     });
+    //     return;
+    // }
 
-    if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        await navigator.share({
-            title: "My Report",
-            text: "Check out this report!",
-            files: [file]
-        });
-        return;
-    }
-
-    document.getElementById("reminderContainer").style.display = "flex";
+    const reminderContainer = document.getElementById("reminderContainer");
+    reminderContainer.style.opacity = "0";
+    reminderContainer.style.filter = "blur(20px)";
+    reminderContainer.style.transition = "opacity 0.8s ease, filter 0.8s ease";
+    reminderContainer.style.display = "flex";
+    setTimeout(() => {
+        reminderContainer.style.opacity = "1";
+        reminderContainer.style.filter = "blur(0)";
+    }, 20);
 });
 
 document.getElementById("downloadBtn").addEventListener("click", () => {
-    document.getElementById("reminderContainer").style.display = "none";
+    const reminderContainer = document.getElementById("reminderContainer");
+    reminderContainer.style.opacity = "0";
+    reminderContainer.style.filter = "blur(20px)";
+    setTimeout(() => {
+        reminderContainer.style.display = "none";
+    }, 400);
+
     const a = document.createElement("a");
     a.href = url;
     a.download = "report.png";
@@ -118,7 +133,12 @@ document.getElementById("downloadBtn").addEventListener("click", () => {
 });
 
 document.getElementById("changeBtn").addEventListener("click", () => {
-    document.getElementById("reminderContainer").style.display = "none";
+    const reminderContainer = document.getElementById("reminderContainer");
+    reminderContainer.style.opacity = "0";
+    reminderContainer.style.filter = "blur(20px)";
+    setTimeout(() => {
+        reminderContainer.style.display = "none";
+    }, 400);
 })
 
 document.getElementById("doneBtn").addEventListener("click", () => {
