@@ -39,13 +39,13 @@ const items = document.querySelectorAll("#summaryPage *");
 items.forEach((item, index) => {
     item.style.opacity = "0";
     item.style.filter = "blur(20px)";
-    item.style.transition = "opacity 1.5s ease, filter 1.5s ease";
+    item.style.transition = "opacity 1.6s ease, filter 1.6s ease";
 
     // 错峰出现
     setTimeout(() => {
         item.style.opacity = "1";
         item.style.filter = "blur(0)";
-    }, index * 500);
+    }, index * 300);
 });
 
 
@@ -86,15 +86,6 @@ const reportImg = document.getElementById("reportImg");
 const shareBtn = document.getElementById("shareBtn");
 
 shareBtn.addEventListener("click", async () => {
-    let proceed = true;
-
-    if (!navigator.canShare) {
-        proceed = confirm(
-            "Your browser does not support system sharing. Confirm = download; Cancel = try another browser."
-        );
-        if (!proceed) return;
-    }
-
     const canvas = await html2canvas(reportEl, {
         useCORS: true,
         backgroundColor: "#ffffff"
@@ -115,11 +106,20 @@ shareBtn.addEventListener("click", async () => {
         return;
     }
 
+    document.getElementById("reminderContainer").style.display = "flex";
+});
+
+document.getElementById("downloadBtn").addEventListener("click", () => {
+    document.getElementById("reminderContainer").style.display = "none";
     const a = document.createElement("a");
     a.href = url;
     a.download = "report.png";
     a.click();
 });
+
+document.getElementById("changeBtn").addEventListener("click", () => {
+    document.getElementById("reminderContainer").style.display = "none";
+})
 
 document.getElementById("doneBtn").addEventListener("click", () => {
     localStorage.removeItem("image");
