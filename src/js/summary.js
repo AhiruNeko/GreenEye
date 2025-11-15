@@ -111,8 +111,7 @@ shareBtn.addEventListener("click", async () => {
             needReminder = true;
         }
     } catch (e) {
-        alert(e.name);
-        needReminder = true
+        needReminder = e.name === "NotAllowedError";
     }
 
     if (needReminder) {
