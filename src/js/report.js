@@ -77,7 +77,7 @@ function updatePage() {
             setTimeout(() => {
                 localStorage.setItem("progNav", "true");
                 window.location.href = "summary.html";
-            }, 1500);
+            }, 1700);
         })
     } else {
         const currentElement = document.getElementById(pages[count - 1]);
@@ -89,7 +89,7 @@ function updatePage() {
             setTimeout(() => {
                 targetElement.classList.add("visible");
                 animations[pages[count]]?.(targetElement);
-            }, 1500);
+            }, 1700);
         });
     }
 }

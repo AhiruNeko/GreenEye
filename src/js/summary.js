@@ -179,16 +179,34 @@ if (localStorage.getItem("joinPage") === "user-join.html") {
 }
 
 if (!localStorage.getItem("saved")) {
+    const base64Data = localStorage.getItem("image");
+    const fileName = crypto.randomUUID() + ".jpg";
+
+    const [meta, content] = base64Data.split(',');
+    const mimeType = meta.match(/:(.*?);/)[1];
+    const byteString = atob(content);
+
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([ab], { type: mimeType });
+    await supabase.storage
+        .from('food_image')
+        .upload(fileName, blob, { upsert: false });
+
     await supabase
         .from("user_data")
         .insert([{
-                user_id: user_id,
-                food_type: localStorage.getItem("food"),
-                chemical_data: parseFloat(localStorage.getItem("chemicalData")),
-                carbon_data: parseFloat(localStorage.getItem("carbonData")),
-                water_data: parseFloat(localStorage.getItem("waterData")),
-                soil_data: parseFloat(localStorage.getItem("soilData")),
-                keywords: localStorage.getItem("keywords")
+            user_id: user_id,
+            food_type: localStorage.getItem("food"),
+            chemical_data: parseFloat(localStorage.getItem("chemicalData")),
+            carbon_data: parseFloat(localStorage.getItem("carbonData")),
+            water_data: parseFloat(localStorage.getItem("waterData")),
+            soil_data: parseFloat(localStorage.getItem("soilData")),
+            keywords: localStorage.getItem("keywords"),
+            food_image: fileName
         }]);
 
     const { data, error } = await supabase
@@ -201,11 +219,6 @@ if (!localStorage.getItem("saved")) {
     const newCarbon = limitNumberLength(data[0].carbon + parseFloat(localStorage.getItem("carbonData")));
     const newWater = limitNumberLength(data[0].water + parseFloat(localStorage.getItem("waterData")));
     const newSoil = limitNumberLength(data[0].soil + parseFloat(localStorage.getItem("soilData")));
-
-    console.log(newChemical);
-    console.log(newCarbon);
-    console.log(newWater);
-    console.log(newSoil);
 
     await supabase
         .from('total_environmental_data')
