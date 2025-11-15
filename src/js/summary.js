@@ -170,7 +170,7 @@ document.getElementById("learnMoreBtn").addEventListener("click", () => {
     window.open("learn-more.html", "_blank");
 });
 
-let user_id = "guest";
+let user_id = "[guest]" + localStorage.getItem("name");
 if (localStorage.getItem("joinPage") === "user-join.html") {
     const {data: {session}} = await supabase.auth.getSession();
     if (session) {

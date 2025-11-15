@@ -77,11 +77,11 @@ function updatePage() {
             setTimeout(() => {
                 localStorage.setItem("progNav", "true");
                 window.location.href = "summary.html";
-            }, 2000);
+            }, 1500);
         })
     } else {
         const currentElement = document.getElementById(pages[count - 1]);
-        targetElement.style.transition = "opacity 3s ease";
+        targetElement.style.transition = "opacity 2.5s ease";
         currentElement.style.transition = "";
 
         requestAnimationFrame(() => {
@@ -89,7 +89,7 @@ function updatePage() {
             setTimeout(() => {
                 targetElement.classList.add("visible");
                 animations[pages[count]]?.(targetElement);
-            }, 2100);
+            }, 1500);
         });
     }
 }
