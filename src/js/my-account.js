@@ -22,20 +22,18 @@ document.addEventListener('click', (event) => {
 });
 
 if (window.location.pathname.endsWith("my-account.html")) {
-    window.addEventListener("load", async () => {
-        const {data: {user}} = await supabase.auth.getUser();
-        console.log(user);
-        const avatarUrl = user.user_metadata.avatar_url;
-        const name = user.user_metadata.name;
-        const fullName = user.user_metadata.full_name;
-        const email = user.user_metadata.email;
-        const iss = user.user_metadata.iss;
-        document.getElementById("avatar").src = avatarUrl;
-        document.getElementById("name").textContent = name;
-        document.getElementById("email").textContent = email;
-        document.getElementById("fullName").textContent = fullName;
-        document.getElementById("moreAboutAccount").href = iss;
-    })
+    const {data: {user}} = await supabase.auth.getUser();
+    console.log(user);
+    const avatarUrl = user.user_metadata.avatar_url;
+    const name = user.user_metadata.name;
+    const fullName = user.user_metadata.full_name;
+    const email = user.user_metadata.email;
+    const iss = user.user_metadata.iss;
+    document.getElementById("avatar").src = avatarUrl;
+    document.getElementById("name").textContent = name;
+    document.getElementById("email").textContent = email;
+    document.getElementById("fullName").textContent = fullName;
+    document.getElementById("moreAboutAccount").href = iss;
 }
 
 if (window.location.pathname.endsWith("my-account-settings.html")) {
