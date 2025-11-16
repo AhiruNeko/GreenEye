@@ -161,8 +161,14 @@ document.getElementById("doneBtn").addEventListener("click", () => {
     localStorage.removeItem("soilData");
     localStorage.removeItem("keywords");
     localStorage.removeItem("food");
-    localStorage.removeItem("joinPage");
     localStorage.removeItem("saved");
+
+    if (localStorage.getItem("joinPage") === "my-account-contribution.html") {
+        localStorage.removeItem("joinPage");
+        window.location.href = "my-account-contribution.html";
+        return;
+    }
+    localStorage.removeItem("joinPage");
     window.location.href = "index.html";
 });
 

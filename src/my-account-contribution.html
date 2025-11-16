@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contributions</title>
+    <link rel="stylesheet" href="css/my-account.css">
+
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">Green Eye</a> - Supporting Local Organic Food
+        </div>
+        <button class="menu-button" id="menuBtn">☰ Menu</button>
+    </nav>
+</head>
+<body>
+<div id="container" class="container">
+    <img src="assets/my-account/bg.png" class="background-image" id="backgroundImage">
+    <div class="sidebar" id="sidebar">
+        <a href="my-account.html">Profile</a>
+        <a href="my-account-contribution.html">My contributions</a>
+        <a href="learn-more.html">Learn more</a>
+        <a href="my-account-settings.html">Settings</a>
+    </div>
+
+    <label class="contributions-label">My contributions</label>
+    <div id="contributionsContainer" class="contributions-container">
+        <table class="contributions-table" id="contributionsTable">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Food name</th>
+                    <th>Food image</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <button class="review-button" id="reviewButton">Review</button>
+    <button class="add-button" id="addButton">Add</button>
+
+</div>
+<script type="module" src="js/my-account.js"></script>
+</body>
+</html>
