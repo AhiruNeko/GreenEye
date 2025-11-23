@@ -107,11 +107,14 @@ if (window.location.pathname.endsWith("my-account-contribution.html")) {
             if (tr.classList.contains("selected")) {
                 tr.classList.remove("selected");
                 rowData = null;
+                selectedImgUrl = null;
                 return;
             }
             tr.classList.add("selected");
             rowData = row;
-            selectedImgUrl = supabase.storage.from('food_image').getPublicUrl(rowData.food_image);
+            const filename = rowData.food_image;
+            const { data } = supabase.storage.from('food_image').getPublicUrl(filename);
+            selectedImgUrl = data.publicUrl;
         });
     });
 
