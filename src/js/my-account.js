@@ -82,9 +82,6 @@ if (window.location.pathname.endsWith("my-account-contribution.html")) {
     data.forEach(row => {
         const tr = document.createElement("tr");
         const time = new Date(row.created_at).toLocaleString();
-        const filename = row.food_image;
-        const { data } = supabase.storage.from('food_image').getPublicUrl(filename);
-        imgUrl = data.publicUrl;
 
         tr.innerHTML = `
             <td>${time}</td>
@@ -111,6 +108,7 @@ if (window.location.pathname.endsWith("my-account-contribution.html")) {
             }
             tr.classList.add("selected");
             rowData = row;
+            imgUrl = supabase.storage.from('food_image').getPublicUrl(rowData.food_image);
         });
     });
 
