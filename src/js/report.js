@@ -36,8 +36,8 @@ if (missing.length > 0) {
 }
 
 const [kw1, kw2] = JSON.parse(localStorage.getItem("keywords"));
-document.getElementById("keyword1").textContent = kw1.keyword;
-document.getElementById("keyword2").textContent = kw2.keyword;
+document.getElementById("keyword1").textContent = kw1.keyword.toUpperCase();
+document.getElementById("keyword2").textContent = kw2.keyword.toUpperCase();
 document.getElementById("description1").textContent = kw1.desc;
 document.getElementById("description2").textContent = kw2.desc;
 

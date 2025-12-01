@@ -97,25 +97,21 @@ if (window.location.pathname.endsWith("my-account-contribution.html")) {
             </td>
         `;
         tr.addEventListener("click", () => {
-            document.querySelectorAll("#contributionsTable tbody tr")
-                .forEach(r => r.classList.remove("selected-row"));
-            tr.classList.add("selected-row");
-        });
-        tbody.appendChild(tr);
-
-        tr.addEventListener("click", () => {
+            const allRows = document.querySelectorAll("#contributionsTable tbody tr");
             if (tr.classList.contains("selected")) {
                 tr.classList.remove("selected");
                 rowData = null;
                 selectedImgUrl = null;
                 return;
             }
+            allRows.forEach(r => r.classList.remove("selected"));
             tr.classList.add("selected");
             rowData = row;
             const filename = rowData.food_image;
-            const { data } = supabase.storage.from('food_image').getPublicUrl(filename);
+            const { data } = supabase.storage.from("food_image").getPublicUrl(filename);
             selectedImgUrl = data.publicUrl;
         });
+
     });
 
     document.getElementById("addButton").addEventListener("click", () => {
