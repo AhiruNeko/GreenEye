@@ -96,11 +96,6 @@ if (window.location.pathname.endsWith("my-account-contribution.html")) {
         }
             </td>
         `;
-        tr.addEventListener("click", () => {
-            document.querySelectorAll("#contributionsTable tbody tr")
-                .forEach(r => r.classList.remove("selected-row"));
-            tr.classList.add("selected-row");
-        });
         tbody.appendChild(tr);
 
         tr.addEventListener("click", () => {
@@ -110,6 +105,8 @@ if (window.location.pathname.endsWith("my-account-contribution.html")) {
                 selectedImgUrl = null;
                 return;
             }
+            document.querySelectorAll("#contributionsTable tbody tr")
+                .forEach(r => r.classList.remove("selected-row"));
             tr.classList.add("selected");
             rowData = row;
             const filename = rowData.food_image;
