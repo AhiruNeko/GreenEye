@@ -436,7 +436,7 @@ body {
 }
 
 .contributions-table tr.selected {
-    background-color: rgba(10,72,40,0.2);
+    background-color: rgba(10,72,40,0.2) !important;
     -webkit-tap-highlight-color: transparent;
 }
 
