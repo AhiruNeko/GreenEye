@@ -91,7 +91,7 @@ if (window.location.pathname.endsWith("my-account-contribution.html")) {
             <td>${row.food_type || "—"}</td>
             <td>
                 ${ row.food_image ?
-            `<img src="${imgUrl}" style="width:10vmin;height:10vmin;border-radius:1vmin;object-fit:cover;">`
+            `<img src="${imgUrl}" style="width:10vmin;height:10vmin;border-radius:1vmin;object-fit:cover;-webkit-tap-highlight-color: transparent;">`
             : "No image"
         }
             </td>
