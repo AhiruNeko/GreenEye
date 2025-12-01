@@ -99,19 +99,19 @@ if (window.location.pathname.endsWith("my-account-contribution.html")) {
         tbody.appendChild(tr);
 
         tr.addEventListener("click", () => {
-            const allRows = document.querySelectorAll("#contributionsTable tbody tr");
             if (tr.classList.contains("selected")) {
                 tr.classList.remove("selected");
                 rowData = null;
                 selectedImgUrl = null;
                 return;
             }
-            allRows.forEach(r => r.classList.remove("selected"));
+            document.querySelectorAll("#contributionsTable tbody tr")
+                .forEach(r => r.classList.remove("selected-row"));
             tr.classList.add("selected");
             rowData = row;
-            const filename = row.food_image;
-            const { data: publicData } = supabase.storage.from('food_image').getPublicUrl(filename);
-            selectedImgUrl = publicData.publicUrl;
+            const filename = rowData.food_image;
+            const { data } = supabase.storage.from('food_image').getPublicUrl(filename);
+            selectedImgUrl = data.publicUrl;
         });
     });
 
