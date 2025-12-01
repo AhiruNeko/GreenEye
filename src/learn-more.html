@@ -3,8 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Learn More</title>
+    <link rel="stylesheet" href="css/learn-more.css">
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">Green Eye</a> - Supporting Local Organic Food
+        </div>
+        <button class="log-in-button" id="logInBtn">Log in</button>
+    </nav>
 </head>
 <body>
-
+<div id="container" class="container">
+    <img src="assets/learn-more/bg.png" class="background-image" id="backgroundImage">
+    <label class="title" id="title">What is Green Eye?</label>
+    <div class="content" id="content">
+        <video src="assets/learn-more/greeneye-100MB.mp4"
+               class="video"
+               id="video"
+               controls>
+        </video>
+        <label class="description" id="description">
+            Green Eye is a visual platform that generates a personalized report for the organic food you support.
+            It highlights reductions in chemical use, carbon emissions, water consumption, and soil protection associated with choosing organic food.
+            While individual contributions may seem small, Greeneye accumulate all users's contributions to showcase the meaningful impact we create together.
+        </label>
+        <hr class="divider">
+        <label class="team" id="team">
+            Developed by</br>Global Challenge II Section 3 Group 1
+        </label>
+    </div>
+</div>
+<script type="module" src="js/learn-more.js"></script>
 </body>
 </html>

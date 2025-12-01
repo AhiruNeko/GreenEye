@@ -7,15 +7,18 @@ const guestBtn = document.getElementById("guestBtn")
 let callbackUserURL = "index.html";
 let callbackGuestURL = "index.html";
 let from = localStorage.getItem("from");
-if (from == "index.html contributionBtn") {
+if (from === "index.html contributionBtn") {
     callbackUserURL = "user-join.html";
     callbackGuestURL = "guest-join.html";
-} else if (from == "guest-join.html logInBtn") {
+} else if (from === "guest-join.html logInBtn") {
     callbackUserURL = "user-join.html";
     callbackGuestURL = "guest-join.html";
-} else if (from == "my-account-settings.html logOutBtn") {
+} else if (from === "my-account-settings.html logOutBtn") {
     callbackUserURL = "my-account.html";
     callbackGuestURL = "index.html";
+} else if (from === "learn-more.html logInBtn") {
+    callbackUserURL = "learn-more.html";
+    callbackGuestURL = "learn-more.html";
 } else {
     callbackUserURL = "index.html";
     callbackGuestURL = "index.html";

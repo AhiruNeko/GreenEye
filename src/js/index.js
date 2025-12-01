@@ -28,7 +28,7 @@ supabase.auth.onAuthStateChange((event, session) => {
 });
 
 document.getElementById("contributionBtn").addEventListener("click", () => {
-    if (contributionBtnTo == "login.html") {
+    if (contributionBtnTo === "login.html") {
         localStorage.setItem("from", "index.html contributionBtn");
     }
     window.location.href = contributionBtnTo;

@@ -235,7 +235,7 @@ body {
 }
 
 .logo a:hover {
-    text-decoration: underline; /* 想要悬停效果可以加 */
+    text-decoration: underline;
 }
 
 
