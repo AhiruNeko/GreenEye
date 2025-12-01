@@ -106,7 +106,7 @@ if (window.location.pathname.endsWith("my-account-contribution.html")) {
                 return;
             }
             document.querySelectorAll("#contributionsTable tbody tr")
-                .forEach(r => r.classList.remove("selected-row"));
+                .forEach(r => r.classList.remove("selected"));
             tr.classList.add("selected");
             rowData = row;
             const filename = rowData.food_image;
