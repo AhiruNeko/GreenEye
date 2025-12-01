@@ -412,6 +412,7 @@ body {
     width: 96%;
     font-size: 3.5vw;
     text-shadow: 0.3vw 0.3vw 0.3vw rgba(0, 0, 0, 0.3);
+    -webkit-tap-highlight-color: transparent;
 }
 
 .contributions-table th,
@@ -425,6 +426,7 @@ body {
     backdrop-filter: blur(1.2vw) brightness(120%);
     -webkit-backdrop-filter: blur(1.2vw) brightness(120%);
     box-shadow: 0 0 0.6vw rgba(0, 0, 0, 0.4);
+    -webkit-tap-highlight-color: transparent;
 }
 
 .contributions-table td {
