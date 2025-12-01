@@ -439,10 +439,6 @@ body {
     background-color: rgba(10,72,40,0.2);
 }
 
-.contributions-table tr:hover {
-    background-color: rgba(10,72,40,0.1);
-}
-
 .review-button {
     position:absolute; top: 78%; left: 50%;
     transform: translate(-50%, -50%);
