@@ -53,7 +53,8 @@ const animations = {
     "pageKeywords": animatePageKeywords,
     "pageChemical": animatePageChemical
 }
-updatePage();
+
+window.addEventListener("load", () => updatePage());
 
 let clickEnable = true;
 document.addEventListener("click", () => {
@@ -72,7 +73,7 @@ function updatePage() {
             targetElement.classList.add("visible");
             animations[pages[count]]?.(targetElement);
         });
-        setTimeout(() => {clickEnable = true;}, 3400);
+        setTimeout(() => {clickEnable = true;}, 3000);
     } else if (count === 5) {
         const currentElement = document.getElementById(pages[count - 1]);
         currentElement.style.transition = "";
@@ -96,7 +97,7 @@ function updatePage() {
                 targetElement.classList.add("visible");
                 animations[pages[count]]?.(targetElement);
             }, 1700);
-            setTimeout(() => {clickEnable = true;}, 3400);
+            setTimeout(() => {clickEnable = true;}, 3000);
         });
     }
 }
