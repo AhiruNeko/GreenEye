@@ -72,7 +72,7 @@ function updatePage() {
             targetElement.classList.add("visible");
             animations[pages[count]]?.(targetElement);
         });
-        setTimeout(() => {clickEnable = true;}, 1700);
+        setTimeout(() => {clickEnable = true;}, 3400);
     } else if (count === 5) {
         const currentElement = document.getElementById(pages[count - 1]);
         currentElement.style.transition = "";
@@ -83,7 +83,8 @@ function updatePage() {
                 window.location.href = "summary.html";
             }, 1700);
             setTimeout(() => {clickEnable = true;}, 1700);
-        })
+        });
+        count = 0;
     } else {
         const currentElement = document.getElementById(pages[count - 1]);
         targetElement.style.transition = "opacity 2.5s ease";
@@ -95,7 +96,7 @@ function updatePage() {
                 targetElement.classList.add("visible");
                 animations[pages[count]]?.(targetElement);
             }, 1700);
-            setTimeout(() => {clickEnable = true;}, 1700);
+            setTimeout(() => {clickEnable = true;}, 3400);
         });
     }
 }
