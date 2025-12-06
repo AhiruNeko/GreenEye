@@ -61,13 +61,7 @@ document.addEventListener("visibilitychange", () => {
 });
 
 let clickEnable = true;
-document.addEventListener("click", () => {
-    console.log("clickEnable");
-    if (!clickEnable) return;
-    clickEnable = false;
-    count++;
-    updatePage()
-});
+window.addEventListener("pageshow", () => updatePage());
 
 function updatePage() {
     const targetElement = document.getElementById(pages[count]);
