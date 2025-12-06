@@ -54,10 +54,15 @@ const animations = {
     "pageChemical": animatePageChemical
 }
 
-window.addEventListener("load", () => updatePage());
+document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+        updatePage();
+    }
+});
 
 let clickEnable = true;
 document.addEventListener("click", () => {
+    console.log("clickEnable");
     if (!clickEnable) return;
     clickEnable = false;
     count++;
