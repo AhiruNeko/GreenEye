@@ -55,7 +55,10 @@ const animations = {
 }
 updatePage();
 
+let clickEnable = true;
 document.addEventListener("click", () => {
+    if (!clickEnable) return;
+    clickEnable = false;
     count++;
     updatePage()
 });
@@ -69,6 +72,7 @@ function updatePage() {
             targetElement.classList.add("visible");
             animations[pages[count]]?.(targetElement);
         });
+        setTimeout(() => {clickEnable = true;}, 1700);
     } else if (count === 5) {
         const currentElement = document.getElementById(pages[count - 1]);
         currentElement.style.transition = "";
@@ -78,6 +82,7 @@ function updatePage() {
                 localStorage.setItem("progNav", "true");
                 window.location.href = "summary.html";
             }, 1700);
+            setTimeout(() => {clickEnable = true;}, 1700);
         })
     } else {
         const currentElement = document.getElementById(pages[count - 1]);
@@ -90,6 +95,7 @@ function updatePage() {
                 targetElement.classList.add("visible");
                 animations[pages[count]]?.(targetElement);
             }, 1700);
+            setTimeout(() => {clickEnable = true;}, 1700);
         });
     }
 }
