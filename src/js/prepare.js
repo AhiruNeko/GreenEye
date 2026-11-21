@@ -79,13 +79,17 @@ async function classifyVegetable() {
     })();
 
     try {
-        const response = await fetch("https://serverless.roboflow.com/vegetable-classification-t6t4d/1?api_key=G1F1T8rZDpAB5gRrJa13", {
+        const response = await fetch("/api/classify", {
             method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: pureBase64
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ image: pureBase64 })
         });
 
         const data = await response.json();
+        if (!response.ok) {
+            console.error(data.error || `Image classification failed (${response.status}).`);
+            return;
+        }
         console.log("Roboflow API result:", data);
 
         const options = [
