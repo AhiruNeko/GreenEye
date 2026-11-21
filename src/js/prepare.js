@@ -55,7 +55,7 @@ if (userImage) {
 document.getElementById("generateBtn").addEventListener("click", () => {
     const veg = document.getElementById("foodSelect").value;
     if(!veg) {
-        alert("Please enter your food.");
+        alert("Please select your food.");
         return;
     }
     localStorage.setItem("food", veg);
@@ -92,19 +92,12 @@ async function classifyVegetable() {
         }
         console.log("Roboflow API result:", data);
 
-        const options = [
-            "Bean", "Bitter Gourd", "Bottle Gourd", "Brinjal", "Broccoli",
-            "Cabbage", "Capsicum", "Carrot", "Cauliflower", "Cucumber",
-            "Papaya", "Potato", "Pumpkin", "Radish", "Tomato"
-        ];
-        let topPrediction = data.top;
-        if (!topPrediction) {
-            const randomIndex = Math.floor(Math.random() * options.length);
-            topPrediction = options[randomIndex];
-        }
         const selectElement = document.getElementById("foodSelect");
-        if (topPrediction && selectElement) {
-            selectElement.value = topPrediction.toLowerCase();
+        const topPrediction = String(data.top || "").trim().toLowerCase();
+        if (selectElement && Array.from(selectElement.options).some(option =>
+            option.value && option.value === topPrediction
+        )) {
+            selectElement.value = topPrediction;
         }
 
     } catch (err) {
@@ -118,7 +111,8 @@ async function classifyVegetable() {
         const titles = Array.from(bgContainer.querySelectorAll("h1, h2, h3"));
         const images = Array.from(bgContainer.querySelectorAll("img"));
         const buttons = Array.from(bgContainer.querySelectorAll("button"));
-        const paragraphs = Array.from(bgContainer.querySelectorAll("p, span, div:not(:has(img, button, h1, h2, h3))"));
+        const paragraphs = Array.from(bgContainer.querySelectorAll("p, span, div"))
+            .filter(el => !el.querySelector("img, button, h1, h2, h3"));
         function shuffle(arr) {
             return arr.sort(() => Math.random() - 0.5);
         }

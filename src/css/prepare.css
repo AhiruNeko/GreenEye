@@ -59,7 +59,7 @@ html, body {
     transform: translateX(-50%);
     width: 88%;
     height: 48%;
-    font-size: 4vw;
+    font-size: max(16px, 4vw);
     border-radius: 2vw;
     background: rgba(255, 255, 255, 0.2);
     color: white;
@@ -71,18 +71,21 @@ html, body {
     text-align: center;
     font-weight: bold;
     padding: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    -webkit-appearance: menulist;
+    appearance: auto;
 }
 
-.select-food::placeholder {
-    color: rgba(0, 0, 0, 0.2);
-    font-family: 'Arial', sans-serif;
-    white-space: nowrap;
-    font-size: 2.5vw;
+.select-food option {
+    color: #0a4828;
+    background: white;
     text-shadow: none;
-    font-weight: normal;
-    position: absolute;
-    top: 10%;
-    left: 5%;
+}
+
+.select-food:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
 }
 
 .food-label {
